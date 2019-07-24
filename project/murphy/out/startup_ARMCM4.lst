@@ -1,0 +1,927 @@
+ARM GAS  /tmp/cc5S5UTJ.s 			page 1
+
+
+   1              	# 1 "../../main_full/startup_ARMCM4.S"
+   1              	/* File: startup_ARMCM4.S
+   1              	...
+   0              	
+   0              	
+   2              	 * Purpose: startup file for Cortex-M4 devices. Should use with
+   3              	 *   GCC for ARM Embedded Processors
+   4              	 * Version: V2.0
+   5              	 * Date: 16 August 2013
+   6              	 *
+   7              	/* Copyright (c) 2011 - 2013 ARM LIMITED
+   8              	
+   9              	   All rights reserved.
+  10              	   Redistribution and use in source and binary forms, with or without
+  11              	   modification, are permitted provided that the following conditions are met:
+  12              	   - Redistributions of source code must retain the above copyright
+  13              	     notice, this list of conditions and the following disclaimer.
+  14              	   - Redistributions in binary form must reproduce the above copyright
+  15              	     notice, this list of conditions and the following disclaimer in the
+  16              	     documentation and/or other materials provided with the distribution.
+  17              	   - Neither the name of ARM nor the names of its contributors may be used
+  18              	     to endorse or promote products derived from this software without
+  19              	     specific prior written permission.
+  20              	   *
+  21              	   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  22              	   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  23              	   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  24              	   ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+  25              	   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  26              	   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  27              	   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  28              	   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  29              	   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  30              	   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  31              	   POSSIBILITY OF SUCH DAMAGE.
+  32              	   ---------------------------------------------------------------------------*/
+  33              		.syntax	unified
+  34              		.arch	armv7e-m
+  35              	
+  36              		.extern __SRAM_segment_end__
+  37              	
+  38              		.section .isr_vector,"a",%progbits
+  39              		.align	4
+  40              		.globl	__isr_vector
+  41              		.global __Vectors
+  42              	
+  43              	__Vectors:
+  44              	__isr_vector:
+  45 0000 FCFFFFFF 		.long	__SRAM_segment_end__ - 4  /* Top of Stack at top of RAM*/
+  46 0004 00000000 		.long	Reset_Handler         /* Reset Handler */
+  47 0008 00000000 		.long	NMI_Handler           /* NMI Handler */
+  48 000c 00000000 		.long	HardFault_Handler     /* Hard Fault Handler */
+  49 0010 00000000 		.long	MemManage_Handler     /* MPU Fault Handler */
+  50 0014 00000000 		.long	BusFault_Handler      /* Bus Fault Handler */
+  51 0018 00000000 		.long	UsageFault_Handler    /* Usage Fault Handler */
+  52 001c 00000000 		.long	0                     /* Reserved */
+  53 0020 00000000 		.long	0                     /* Reserved */
+ARM GAS  /tmp/cc5S5UTJ.s 			page 2
+
+
+  54 0024 00000000 		.long	0                     /* Reserved */
+  55 0028 00000000 		.long	0                     /* Reserved */
+  56 002c 00000000 		.long	SVC_Handler           /* SVCall Handler */
+  57 0030 00000000 		.long	DebugMon_Handler      /* Debug Monitor Handler */
+  58 0034 00000000 		.long	0                     /* Reserved */
+  59 0038 00000000 		.long	PendSV_Handler        /* PendSV Handler */
+  60 003c 00000000 		.long	SysTick_Handler       /* SysTick Handler */
+  61              	
+  62              		/* External interrupts */
+  63 0040 00000000 		.long     NVIC_Handler_WDT
+  64 0044 00000000 		.long     NVIC_Handler_001
+  65 0048 00000000 		.long     NVIC_Handler_002
+  66 004c 00000000 		.long     NVIC_Handler_003
+  67 0050 00000000 		.long     NVIC_Handler_004
+  68 0054 00000000 		.long     NVIC_Handler_005
+  69 0058 00000000 		.long     NVIC_Handler_006
+  70 005c 00000000 		.long     NVIC_Handler_007
+  71 0060 00000000 		.long     NVIC_Handler_008
+  72 0064 00000000 		.long     NVIC_Handler_009
+  73 0068 00000000 		.long     NVIC_Handler_010
+  74 006c 00000000 		.long     NVIC_Handler_011
+  75 0070 00000000 		.long     NVIC_Handler_012
+  76 0074 00000000 		.long     NVIC_Handler_013
+  77 0078 00000000 		.long     NVIC_Handler_014
+  78 007c 00000000 		.long     NVIC_Handler_015
+  79 0080 00000000 		.long     NVIC_Handler_016
+  80 0084 00000000 		.long     NVIC_Handler_017
+  81 0088 00000000 		.long     NVIC_Handler_018
+  82 008c 00000000 		.long     NVIC_Handler_019
+  83 0090 00000000 		.long     NVIC_Handler_020
+  84 0094 00000000 		.long     NVIC_Handler_021
+  85 0098 00000000 		.long     NVIC_Handler_022
+  86 009c 00000000 		.long     NVIC_Handler_023
+  87 00a0 00000000 		.long     NVIC_Handler_024
+  88 00a4 00000000 		.long     NVIC_Handler_025
+  89 00a8 00000000 		.long     NVIC_Handler_026
+  90 00ac 00000000 		.long     NVIC_Handler_027
+  91 00b0 00000000 		.long     NVIC_Handler_028
+  92 00b4 00000000 		.long     NVIC_Handler_029
+  93 00b8 00000000 		.long     NVIC_Handler_030
+  94 00bc 00000000 		.long     NVIC_Handler_031
+  95 00c0 00000000 		.long     NVIC_Handler_032
+  96 00c4 00000000 		.long     NVIC_Handler_033
+  97 00c8 00000000 		.long     NVIC_Handler_034
+  98 00cc 00000000 		.long     NVIC_Handler_035
+  99 00d0 00000000 		.long     NVIC_Handler_036
+ 100 00d4 00000000 		.long     NVIC_Handler_037
+ 101 00d8 00000000 		.long     NVIC_Handler_038
+ 102 00dc 00000000 		.long     NVIC_Handler_039
+ 103 00e0 00000000 		.long     NVIC_Handler_040
+ 104 00e4 00000000 		.long     NVIC_Handler_041
+ 105 00e8 00000000 		.long     NVIC_Handler_042
+ 106 00ec 00000000 		.long     NVIC_Handler_043
+ 107 00f0 00000000 		.long     NVIC_Handler_044
+ 108 00f4 00000000 		.long     NVIC_Handler_045
+ 109 00f8 00000000 		.long     NVIC_Handler_046
+ 110 00fc 00000000 		.long     NVIC_Handler_047
+ARM GAS  /tmp/cc5S5UTJ.s 			page 3
+
+
+ 111 0100 00000000 		.long     NVIC_Handler_048
+ 112 0104 00000000 		.long     NVIC_Handler_049
+ 113 0108 00000000 		.long     NVIC_Handler_050
+ 114 010c 00000000 		.long     NVIC_Handler_051
+ 115 0110 00000000 		.long     NVIC_Handler_052
+ 116 0114 00000000 		.long     NVIC_Handler_053
+ 117 0118 00000000 		.long     NVIC_Handler_054
+ 118 011c 00000000 		.long     NVIC_Handler_055
+ 119 0120 00000000 		.long     NVIC_Handler_056
+ 120 0124 00000000 		.long     NVIC_Handler_057
+ 121 0128 00000000 		.long     NVIC_Handler_058
+ 122 012c 00000000 		.long     NVIC_Handler_059
+ 123 0130 00000000 		.long     NVIC_Handler_060
+ 124 0134 00000000 		.long     NVIC_Handler_061
+ 125 0138 00000000 		.long     NVIC_Handler_062
+ 126 013c 00000000 		.long     NVIC_Handler_063
+ 127 0140 00000000 		.long     NVIC_Handler_064
+ 128 0144 00000000 		.long     NVIC_Handler_065
+ 129 0148 00000000 		.long     NVIC_Handler_066
+ 130 014c 00000000 		.long     NVIC_Handler_067
+ 131 0150 00000000 		.long     NVIC_Handler_068
+ 132 0154 00000000 		.long     NVIC_Handler_069
+ 133 0158 00000000 		.long     NVIC_Handler_070
+ 134 015c 00000000 		.long     NVIC_Handler_071
+ 135 0160 00000000 		.long     NVIC_Handler_072
+ 136 0164 00000000 		.long     NVIC_Handler_073
+ 137 0168 00000000 		.long     NVIC_Handler_074
+ 138 016c 00000000 		.long     NVIC_Handler_075
+ 139 0170 00000000 		.long     NVIC_Handler_076
+ 140 0174 00000000 		.long     NVIC_Handler_077
+ 141 0178 00000000 		.long     NVIC_Handler_078
+ 142 017c 00000000 		.long     NVIC_Handler_079
+ 143 0180 00000000 		.long     NVIC_Handler_080
+ 144 0184 00000000 		.long     NVIC_Handler_081
+ 145 0188 00000000 		.long     NVIC_Handler_082
+ 146 018c 00000000 		.long     NVIC_Handler_083
+ 147 0190 00000000 		.long     NVIC_Handler_084
+ 148 0194 00000000 		.long     NVIC_Handler_085
+ 149 0198 00000000 		.long     NVIC_Handler_086
+ 150 019c 00000000 		.long     NVIC_Handler_087
+ 151 01a0 00000000 		.long     NVIC_Handler_088
+ 152 01a4 00000000 		.long     NVIC_Handler_089
+ 153 01a8 00000000 		.long     NVIC_Handler_090
+ 154 01ac 00000000 		.long     NVIC_Handler_091
+ 155 01b0 00000000 		.long     NVIC_Handler_092
+ 156 01b4 00000000 		.long     NVIC_Handler_093
+ 157 01b8 00000000 		.long     NVIC_Handler_094
+ 158 01bc 00000000 		.long     NVIC_Handler_095
+ 159 01c0 00000000 		.long     NVIC_Handler_096
+ 160 01c4 00000000 		.long     NVIC_Handler_097
+ 161 01c8 00000000 		.long     NVIC_Handler_098
+ 162 01cc 00000000 		.long     NVIC_Handler_099
+ 163 01d0 00000000 		.long     NVIC_Handler_100
+ 164 01d4 00000000 		.long     NVIC_Handler_101
+ 165 01d8 00000000 		.long     NVIC_Handler_102
+ 166 01dc 00000000 		.long     NVIC_Handler_103
+ 167 01e0 00000000 		.long     NVIC_Handler_104
+ARM GAS  /tmp/cc5S5UTJ.s 			page 4
+
+
+ 168 01e4 00000000 		.long     NVIC_Handler_105
+ 169 01e8 00000000 		.long     NVIC_Handler_106
+ 170 01ec 00000000 		.long     NVIC_Handler_107
+ 171 01f0 00000000 		.long     NVIC_Handler_108
+ 172 01f4 00000000 		.long     NVIC_Handler_109
+ 173 01f8 00000000 		.long     NVIC_Handler_110
+ 174 01fc 00000000 		.long     NVIC_Handler_111
+ 175 0200 00000000 		.long     NVIC_Handler_112
+ 176 0204 00000000 		.long     NVIC_Handler_113
+ 177 0208 00000000 		.long     NVIC_Handler_114
+ 178 020c 00000000 		.long     NVIC_Handler_115
+ 179 0210 00000000 		.long     NVIC_Handler_116
+ 180 0214 00000000 		.long     NVIC_Handler_117
+ 181 0218 00000000 		.long     NVIC_Handler_118
+ 182 021c 00000000 		.long     NVIC_Handler_119
+ 183 0220 00000000 		.long     NVIC_Handler_120
+ 184 0224 00000000 		.long     NVIC_Handler_121
+ 185 0228 00000000 		.long     NVIC_Handler_122
+ 186 022c 00000000 		.long     NVIC_Handler_123
+ 187 0230 00000000 		.long     NVIC_Handler_124
+ 188 0234 00000000 		.long     NVIC_Handler_125
+ 189 0238 00000000 		.long     NVIC_Handler_126
+ 190 023c 00000000 		.long     NVIC_Handler_127
+ 191 0240 00000000 		.long     NVIC_Handler_128
+ 192 0244 00000000 		.long     NVIC_Handler_129
+ 193 0248 00000000 		.long     NVIC_Handler_130
+ 194              	
+ 195              	/* ToDo:  Add here the vectors for the device specific external interrupts handler */
+ 196              		//.long	<DeviceInterrupt>_IRQHandler              /*  0: Default                  */
+ 197              	
+ 198              		.size	__Vectors, . - __Vectors
+ 199              	
+ 200              		.text
+ 201              		.thumb
+ 202              		.thumb_func
+ 203              		.align	2
+ 204              		.globl _start
+ 205              		.extern main
+ 206              		.globl	Reset_Handler
+ 207              		.type	Reset_Handler, %function
+ 208              	_start:
+ 209              	Reset_Handler:
+ 210              	/*  Firstly it copies data from read only memory to RAM. There are two schemes
+ 211              	 *  to copy. One can copy more than one sections. Another can only copy
+ 212              	 *  one section.  The former scheme needs more instructions and read-only
+ 213              	 *  data to implement than the latter.
+ 214              	 *  Macro __STARTUP_COPY_MULTIPLE is used to choose between two schemes.  */
+ 215              	
+ 216              	/*  Single section scheme.
+ 217              	 *
+ 218              	 *  The ranges of copy from/to are specified by following symbols
+ 219              	 *    __etext: LMA of start of the section to copy from. Usually end of text
+ 220              	 *    __data_start__: VMA of start of the section to copy to
+ 221              	 *    __data_end__: VMA of end of the section to copy to
+ 222              	 *
+ 223              	 *  All addresses must be aligned to 4 bytes boundary.
+ 224              	 */
+ARM GAS  /tmp/cc5S5UTJ.s 			page 5
+
+
+ 225 0000 DFF818D0 		ldr sp, =__SRAM_segment_end__
+ 226 0004 81B0     		sub sp, sp, #4
+ 227              	
+ 228              	/*
+ 229              		ldr	r1, =__etext
+ 230              		ldr	r2, =__data_start__
+ 231              		ldr	r3, =__data_end__
+ 232              	
+ 233              	.L_loop1:
+ 234              		cmp	r2, r3
+ 235              		ittt	lt
+ 236              		ldrlt	r0, [r1], #4
+ 237              		strlt	r0, [r2], #4
+ 238              		blt	.L_loop1
+ 239              	*/
+ 240              	
+ 241              	/*  This part of work usually is done in C library startup code. Otherwise,
+ 242              	 *  define this macro to enable it in this startup.
+ 243              	 *
+ 244              	 *  There are two schemes too. One can clear multiple BSS sections. Another
+ 245              	 *  can only clear one section. The former is more size expensive than the
+ 246              	 *  latter.
+ 247              	 *
+ 248              	 *  Define macro __STARTUP_CLEAR_BSS_MULTIPLE to choose the former.
+ 249              	 *  Otherwise efine macro __STARTUP_CLEAR_BSS to choose the later.
+ 250              	 */
+ 251              	
+ 252              	 /*  Single BSS section scheme.
+ 253              	 *
+ 254              	 *  The BSS section is specified by following symbols
+ 255              	 *    __bss_start__: start of the BSS section.
+ 256              	 *    __bss_end__: end of the BSS section.
+ 257              	 *
+ 258              	 *  Both addresses must be aligned to 4 bytes boundary.
+ 259              	 */
+ 260 0006 0649     		ldr	r1, =__bss_start__
+ 261 0008 064A     		ldr	r2, =__bss_end__
+ 262              	
+ 263 000a 0020     		movs	r0, 0
+ 264              	.L_loop3:
+ 265 000c 9142     		cmp	r1, r2
+ 266 000e BCBF     		itt	lt
+ 267 0010 41F8040B 		strlt	r0, [r1], #4
+ 268 0014 FAE7     		blt	.L_loop3
+ 269              	
+ 270              	#ifndef __NO_SYSTEM_INIT
+ 271              	/*	bl	SystemInit */
+ 272              	#endif
+ 273              	
+ 274 0016 FFF7FEFF 		bl	main
+ 275              	
+ 276 001a 00000000 		.pool
+ 276      00000000 
+ 276      00000000 
+ 276      0000
+ 277              		.size	Reset_Handler, . - Reset_Handler
+ 278              	
+ARM GAS  /tmp/cc5S5UTJ.s 			page 6
+
+
+ 279              		.align	1
+ 280              		.thumb_func
+ 281              		.weak	Default_Handler
+ 282              		.type	Default_Handler, %function
+ 283              	Default_Handler:
+ 284 0028 FEE7     		b	.
+ 285              		.size	Default_Handler, . - Default_Handler
+ 286              	
+ 287              	/*    Macro to define default handlers. Default handler
+ 288              	 *    will be weak symbol and just dead loops. They can be
+ 289              	 *    overwritten by other handlers */
+ 290              		.macro	def_irq_handler	handler_name
+ 291              		.weak	\handler_name
+ 292              		.set	\handler_name, Default_Handler
+ 293              		.endm
+ 294              	
+ 295              		def_irq_handler	NMI_Handler
+ 295              	>  .weak NMI_Handler
+ 295              	>  .set NMI_Handler,Default_Handler
+ 296              		def_irq_handler	HardFault_Handler
+ 296              	>  .weak HardFault_Handler
+ 296              	>  .set HardFault_Handler,Default_Handler
+ 297              		def_irq_handler	MemManage_Handler
+ 297              	>  .weak MemManage_Handler
+ 297              	>  .set MemManage_Handler,Default_Handler
+ 298              		def_irq_handler	BusFault_Handler
+ 298              	>  .weak BusFault_Handler
+ 298              	>  .set BusFault_Handler,Default_Handler
+ 299              		def_irq_handler	UsageFault_Handler
+ 299              	>  .weak UsageFault_Handler
+ 299              	>  .set UsageFault_Handler,Default_Handler
+ 300              	/*	def_irq_handler	SVC_Handler */
+ 301              		def_irq_handler	DebugMon_Handler
+ 301              	>  .weak DebugMon_Handler
+ 301              	>  .set DebugMon_Handler,Default_Handler
+ 302              	/*	def_irq_handler	PendSV_Handler */
+ 303              	/*	def_irq_handler	SysTick_Handler */
+ 304              		def_irq_handler	DEF_IRQHandler
+ 304              	>  .weak DEF_IRQHandler
+ 304              	>  .set DEF_IRQHandler,Default_Handler
+ 305              	
+ 306              		def_irq_handler     NVIC_Handler_WDT
+ 306              	>  .weak NVIC_Handler_WDT
+ 306              	>  .set NVIC_Handler_WDT,Default_Handler
+ 307              		def_irq_handler     NVIC_Handler_001
+ 307              	>  .weak NVIC_Handler_001
+ 307              	>  .set NVIC_Handler_001,Default_Handler
+ 308              		def_irq_handler     NVIC_Handler_002
+ 308              	>  .weak NVIC_Handler_002
+ 308              	>  .set NVIC_Handler_002,Default_Handler
+ 309              		def_irq_handler     NVIC_Handler_003
+ 309              	>  .weak NVIC_Handler_003
+ 309              	>  .set NVIC_Handler_003,Default_Handler
+ 310              		def_irq_handler     NVIC_Handler_004
+ 310              	>  .weak NVIC_Handler_004
+ 310              	>  .set NVIC_Handler_004,Default_Handler
+ 311              		def_irq_handler     NVIC_Handler_005
+ARM GAS  /tmp/cc5S5UTJ.s 			page 7
+
+
+ 311              	>  .weak NVIC_Handler_005
+ 311              	>  .set NVIC_Handler_005,Default_Handler
+ 312              		def_irq_handler     NVIC_Handler_006
+ 312              	>  .weak NVIC_Handler_006
+ 312              	>  .set NVIC_Handler_006,Default_Handler
+ 313              		def_irq_handler     NVIC_Handler_007
+ 313              	>  .weak NVIC_Handler_007
+ 313              	>  .set NVIC_Handler_007,Default_Handler
+ 314              		def_irq_handler     NVIC_Handler_008
+ 314              	>  .weak NVIC_Handler_008
+ 314              	>  .set NVIC_Handler_008,Default_Handler
+ 315              		def_irq_handler     NVIC_Handler_009
+ 315              	>  .weak NVIC_Handler_009
+ 315              	>  .set NVIC_Handler_009,Default_Handler
+ 316              		def_irq_handler     NVIC_Handler_010
+ 316              	>  .weak NVIC_Handler_010
+ 316              	>  .set NVIC_Handler_010,Default_Handler
+ 317              		def_irq_handler     NVIC_Handler_011
+ 317              	>  .weak NVIC_Handler_011
+ 317              	>  .set NVIC_Handler_011,Default_Handler
+ 318              		def_irq_handler     NVIC_Handler_012
+ 318              	>  .weak NVIC_Handler_012
+ 318              	>  .set NVIC_Handler_012,Default_Handler
+ 319              		def_irq_handler     NVIC_Handler_013
+ 319              	>  .weak NVIC_Handler_013
+ 319              	>  .set NVIC_Handler_013,Default_Handler
+ 320              		def_irq_handler     NVIC_Handler_014
+ 320              	>  .weak NVIC_Handler_014
+ 320              	>  .set NVIC_Handler_014,Default_Handler
+ 321              		def_irq_handler     NVIC_Handler_015
+ 321              	>  .weak NVIC_Handler_015
+ 321              	>  .set NVIC_Handler_015,Default_Handler
+ 322              		def_irq_handler     NVIC_Handler_016
+ 322              	>  .weak NVIC_Handler_016
+ 322              	>  .set NVIC_Handler_016,Default_Handler
+ 323              		def_irq_handler     NVIC_Handler_017
+ 323              	>  .weak NVIC_Handler_017
+ 323              	>  .set NVIC_Handler_017,Default_Handler
+ 324              		def_irq_handler     NVIC_Handler_018
+ 324              	>  .weak NVIC_Handler_018
+ 324              	>  .set NVIC_Handler_018,Default_Handler
+ 325              		def_irq_handler     NVIC_Handler_019
+ 325              	>  .weak NVIC_Handler_019
+ 325              	>  .set NVIC_Handler_019,Default_Handler
+ 326              		def_irq_handler     NVIC_Handler_020
+ 326              	>  .weak NVIC_Handler_020
+ 326              	>  .set NVIC_Handler_020,Default_Handler
+ 327              		def_irq_handler     NVIC_Handler_021
+ 327              	>  .weak NVIC_Handler_021
+ 327              	>  .set NVIC_Handler_021,Default_Handler
+ 328              		def_irq_handler     NVIC_Handler_022
+ 328              	>  .weak NVIC_Handler_022
+ 328              	>  .set NVIC_Handler_022,Default_Handler
+ 329              		def_irq_handler     NVIC_Handler_023
+ 329              	>  .weak NVIC_Handler_023
+ 329              	>  .set NVIC_Handler_023,Default_Handler
+ 330              		def_irq_handler     NVIC_Handler_024
+ARM GAS  /tmp/cc5S5UTJ.s 			page 8
+
+
+ 330              	>  .weak NVIC_Handler_024
+ 330              	>  .set NVIC_Handler_024,Default_Handler
+ 331              		def_irq_handler     NVIC_Handler_025
+ 331              	>  .weak NVIC_Handler_025
+ 331              	>  .set NVIC_Handler_025,Default_Handler
+ 332              		def_irq_handler     NVIC_Handler_026
+ 332              	>  .weak NVIC_Handler_026
+ 332              	>  .set NVIC_Handler_026,Default_Handler
+ 333              		def_irq_handler     NVIC_Handler_027
+ 333              	>  .weak NVIC_Handler_027
+ 333              	>  .set NVIC_Handler_027,Default_Handler
+ 334              		def_irq_handler     NVIC_Handler_028
+ 334              	>  .weak NVIC_Handler_028
+ 334              	>  .set NVIC_Handler_028,Default_Handler
+ 335              		def_irq_handler     NVIC_Handler_029
+ 335              	>  .weak NVIC_Handler_029
+ 335              	>  .set NVIC_Handler_029,Default_Handler
+ 336              		def_irq_handler     NVIC_Handler_030
+ 336              	>  .weak NVIC_Handler_030
+ 336              	>  .set NVIC_Handler_030,Default_Handler
+ 337              		def_irq_handler     NVIC_Handler_031
+ 337              	>  .weak NVIC_Handler_031
+ 337              	>  .set NVIC_Handler_031,Default_Handler
+ 338              		def_irq_handler     NVIC_Handler_032
+ 338              	>  .weak NVIC_Handler_032
+ 338              	>  .set NVIC_Handler_032,Default_Handler
+ 339              		def_irq_handler     NVIC_Handler_033
+ 339              	>  .weak NVIC_Handler_033
+ 339              	>  .set NVIC_Handler_033,Default_Handler
+ 340              		def_irq_handler     NVIC_Handler_034
+ 340              	>  .weak NVIC_Handler_034
+ 340              	>  .set NVIC_Handler_034,Default_Handler
+ 341              		def_irq_handler     NVIC_Handler_035
+ 341              	>  .weak NVIC_Handler_035
+ 341              	>  .set NVIC_Handler_035,Default_Handler
+ 342              		def_irq_handler     NVIC_Handler_036
+ 342              	>  .weak NVIC_Handler_036
+ 342              	>  .set NVIC_Handler_036,Default_Handler
+ 343              		def_irq_handler     NVIC_Handler_037
+ 343              	>  .weak NVIC_Handler_037
+ 343              	>  .set NVIC_Handler_037,Default_Handler
+ 344              		def_irq_handler     NVIC_Handler_038
+ 344              	>  .weak NVIC_Handler_038
+ 344              	>  .set NVIC_Handler_038,Default_Handler
+ 345              		def_irq_handler     NVIC_Handler_039
+ 345              	>  .weak NVIC_Handler_039
+ 345              	>  .set NVIC_Handler_039,Default_Handler
+ 346              		def_irq_handler     NVIC_Handler_040
+ 346              	>  .weak NVIC_Handler_040
+ 346              	>  .set NVIC_Handler_040,Default_Handler
+ 347              		def_irq_handler     NVIC_Handler_041
+ 347              	>  .weak NVIC_Handler_041
+ 347              	>  .set NVIC_Handler_041,Default_Handler
+ 348              		def_irq_handler     NVIC_Handler_042
+ 348              	>  .weak NVIC_Handler_042
+ 348              	>  .set NVIC_Handler_042,Default_Handler
+ 349              		def_irq_handler     NVIC_Handler_043
+ARM GAS  /tmp/cc5S5UTJ.s 			page 9
+
+
+ 349              	>  .weak NVIC_Handler_043
+ 349              	>  .set NVIC_Handler_043,Default_Handler
+ 350              		def_irq_handler     NVIC_Handler_044
+ 350              	>  .weak NVIC_Handler_044
+ 350              	>  .set NVIC_Handler_044,Default_Handler
+ 351              		def_irq_handler     NVIC_Handler_045
+ 351              	>  .weak NVIC_Handler_045
+ 351              	>  .set NVIC_Handler_045,Default_Handler
+ 352              		def_irq_handler     NVIC_Handler_046
+ 352              	>  .weak NVIC_Handler_046
+ 352              	>  .set NVIC_Handler_046,Default_Handler
+ 353              		def_irq_handler     NVIC_Handler_047
+ 353              	>  .weak NVIC_Handler_047
+ 353              	>  .set NVIC_Handler_047,Default_Handler
+ 354              		def_irq_handler     NVIC_Handler_048
+ 354              	>  .weak NVIC_Handler_048
+ 354              	>  .set NVIC_Handler_048,Default_Handler
+ 355              		def_irq_handler     NVIC_Handler_049
+ 355              	>  .weak NVIC_Handler_049
+ 355              	>  .set NVIC_Handler_049,Default_Handler
+ 356              		def_irq_handler     NVIC_Handler_050
+ 356              	>  .weak NVIC_Handler_050
+ 356              	>  .set NVIC_Handler_050,Default_Handler
+ 357              		def_irq_handler     NVIC_Handler_051
+ 357              	>  .weak NVIC_Handler_051
+ 357              	>  .set NVIC_Handler_051,Default_Handler
+ 358              		def_irq_handler     NVIC_Handler_052
+ 358              	>  .weak NVIC_Handler_052
+ 358              	>  .set NVIC_Handler_052,Default_Handler
+ 359              		def_irq_handler     NVIC_Handler_053
+ 359              	>  .weak NVIC_Handler_053
+ 359              	>  .set NVIC_Handler_053,Default_Handler
+ 360              		def_irq_handler     NVIC_Handler_054
+ 360              	>  .weak NVIC_Handler_054
+ 360              	>  .set NVIC_Handler_054,Default_Handler
+ 361              		def_irq_handler     NVIC_Handler_055
+ 361              	>  .weak NVIC_Handler_055
+ 361              	>  .set NVIC_Handler_055,Default_Handler
+ 362              		def_irq_handler     NVIC_Handler_056
+ 362              	>  .weak NVIC_Handler_056
+ 362              	>  .set NVIC_Handler_056,Default_Handler
+ 363              		def_irq_handler     NVIC_Handler_057
+ 363              	>  .weak NVIC_Handler_057
+ 363              	>  .set NVIC_Handler_057,Default_Handler
+ 364              		def_irq_handler     NVIC_Handler_058
+ 364              	>  .weak NVIC_Handler_058
+ 364              	>  .set NVIC_Handler_058,Default_Handler
+ 365              		def_irq_handler     NVIC_Handler_059
+ 365              	>  .weak NVIC_Handler_059
+ 365              	>  .set NVIC_Handler_059,Default_Handler
+ 366              		def_irq_handler     NVIC_Handler_060
+ 366              	>  .weak NVIC_Handler_060
+ 366              	>  .set NVIC_Handler_060,Default_Handler
+ 367              		def_irq_handler     NVIC_Handler_061
+ 367              	>  .weak NVIC_Handler_061
+ 367              	>  .set NVIC_Handler_061,Default_Handler
+ 368              		def_irq_handler     NVIC_Handler_062
+ARM GAS  /tmp/cc5S5UTJ.s 			page 10
+
+
+ 368              	>  .weak NVIC_Handler_062
+ 368              	>  .set NVIC_Handler_062,Default_Handler
+ 369              		def_irq_handler     NVIC_Handler_063
+ 369              	>  .weak NVIC_Handler_063
+ 369              	>  .set NVIC_Handler_063,Default_Handler
+ 370              		def_irq_handler     NVIC_Handler_064
+ 370              	>  .weak NVIC_Handler_064
+ 370              	>  .set NVIC_Handler_064,Default_Handler
+ 371              		def_irq_handler     NVIC_Handler_065
+ 371              	>  .weak NVIC_Handler_065
+ 371              	>  .set NVIC_Handler_065,Default_Handler
+ 372              		def_irq_handler     NVIC_Handler_066
+ 372              	>  .weak NVIC_Handler_066
+ 372              	>  .set NVIC_Handler_066,Default_Handler
+ 373              		def_irq_handler     NVIC_Handler_067
+ 373              	>  .weak NVIC_Handler_067
+ 373              	>  .set NVIC_Handler_067,Default_Handler
+ 374              		def_irq_handler     NVIC_Handler_068
+ 374              	>  .weak NVIC_Handler_068
+ 374              	>  .set NVIC_Handler_068,Default_Handler
+ 375              		def_irq_handler     NVIC_Handler_069
+ 375              	>  .weak NVIC_Handler_069
+ 375              	>  .set NVIC_Handler_069,Default_Handler
+ 376              		def_irq_handler     NVIC_Handler_070
+ 376              	>  .weak NVIC_Handler_070
+ 376              	>  .set NVIC_Handler_070,Default_Handler
+ 377              		def_irq_handler     NVIC_Handler_071
+ 377              	>  .weak NVIC_Handler_071
+ 377              	>  .set NVIC_Handler_071,Default_Handler
+ 378              		def_irq_handler     NVIC_Handler_072
+ 378              	>  .weak NVIC_Handler_072
+ 378              	>  .set NVIC_Handler_072,Default_Handler
+ 379              		def_irq_handler     NVIC_Handler_073
+ 379              	>  .weak NVIC_Handler_073
+ 379              	>  .set NVIC_Handler_073,Default_Handler
+ 380              		def_irq_handler     NVIC_Handler_074
+ 380              	>  .weak NVIC_Handler_074
+ 380              	>  .set NVIC_Handler_074,Default_Handler
+ 381              		def_irq_handler     NVIC_Handler_075
+ 381              	>  .weak NVIC_Handler_075
+ 381              	>  .set NVIC_Handler_075,Default_Handler
+ 382              		def_irq_handler     NVIC_Handler_076
+ 382              	>  .weak NVIC_Handler_076
+ 382              	>  .set NVIC_Handler_076,Default_Handler
+ 383              		def_irq_handler     NVIC_Handler_077
+ 383              	>  .weak NVIC_Handler_077
+ 383              	>  .set NVIC_Handler_077,Default_Handler
+ 384              		def_irq_handler     NVIC_Handler_078
+ 384              	>  .weak NVIC_Handler_078
+ 384              	>  .set NVIC_Handler_078,Default_Handler
+ 385              		def_irq_handler     NVIC_Handler_079
+ 385              	>  .weak NVIC_Handler_079
+ 385              	>  .set NVIC_Handler_079,Default_Handler
+ 386              		def_irq_handler     NVIC_Handler_080
+ 386              	>  .weak NVIC_Handler_080
+ 386              	>  .set NVIC_Handler_080,Default_Handler
+ 387              		def_irq_handler     NVIC_Handler_081
+ARM GAS  /tmp/cc5S5UTJ.s 			page 11
+
+
+ 387              	>  .weak NVIC_Handler_081
+ 387              	>  .set NVIC_Handler_081,Default_Handler
+ 388              		def_irq_handler     NVIC_Handler_082
+ 388              	>  .weak NVIC_Handler_082
+ 388              	>  .set NVIC_Handler_082,Default_Handler
+ 389              		def_irq_handler     NVIC_Handler_083
+ 389              	>  .weak NVIC_Handler_083
+ 389              	>  .set NVIC_Handler_083,Default_Handler
+ 390              		def_irq_handler     NVIC_Handler_084
+ 390              	>  .weak NVIC_Handler_084
+ 390              	>  .set NVIC_Handler_084,Default_Handler
+ 391              		def_irq_handler     NVIC_Handler_085
+ 391              	>  .weak NVIC_Handler_085
+ 391              	>  .set NVIC_Handler_085,Default_Handler
+ 392              		def_irq_handler     NVIC_Handler_086
+ 392              	>  .weak NVIC_Handler_086
+ 392              	>  .set NVIC_Handler_086,Default_Handler
+ 393              		def_irq_handler     NVIC_Handler_087
+ 393              	>  .weak NVIC_Handler_087
+ 393              	>  .set NVIC_Handler_087,Default_Handler
+ 394              		def_irq_handler     NVIC_Handler_088
+ 394              	>  .weak NVIC_Handler_088
+ 394              	>  .set NVIC_Handler_088,Default_Handler
+ 395              		def_irq_handler     NVIC_Handler_089
+ 395              	>  .weak NVIC_Handler_089
+ 395              	>  .set NVIC_Handler_089,Default_Handler
+ 396              		def_irq_handler     NVIC_Handler_090
+ 396              	>  .weak NVIC_Handler_090
+ 396              	>  .set NVIC_Handler_090,Default_Handler
+ 397              		def_irq_handler     NVIC_Handler_091
+ 397              	>  .weak NVIC_Handler_091
+ 397              	>  .set NVIC_Handler_091,Default_Handler
+ 398              		def_irq_handler     NVIC_Handler_092
+ 398              	>  .weak NVIC_Handler_092
+ 398              	>  .set NVIC_Handler_092,Default_Handler
+ 399              		def_irq_handler     NVIC_Handler_093
+ 399              	>  .weak NVIC_Handler_093
+ 399              	>  .set NVIC_Handler_093,Default_Handler
+ 400              		def_irq_handler     NVIC_Handler_094
+ 400              	>  .weak NVIC_Handler_094
+ 400              	>  .set NVIC_Handler_094,Default_Handler
+ 401              		def_irq_handler     NVIC_Handler_095
+ 401              	>  .weak NVIC_Handler_095
+ 401              	>  .set NVIC_Handler_095,Default_Handler
+ 402              		def_irq_handler     NVIC_Handler_096
+ 402              	>  .weak NVIC_Handler_096
+ 402              	>  .set NVIC_Handler_096,Default_Handler
+ 403              		def_irq_handler     NVIC_Handler_097
+ 403              	>  .weak NVIC_Handler_097
+ 403              	>  .set NVIC_Handler_097,Default_Handler
+ 404              		def_irq_handler     NVIC_Handler_098
+ 404              	>  .weak NVIC_Handler_098
+ 404              	>  .set NVIC_Handler_098,Default_Handler
+ 405              		def_irq_handler     NVIC_Handler_099
+ 405              	>  .weak NVIC_Handler_099
+ 405              	>  .set NVIC_Handler_099,Default_Handler
+ 406              		def_irq_handler     NVIC_Handler_100
+ARM GAS  /tmp/cc5S5UTJ.s 			page 12
+
+
+ 406              	>  .weak NVIC_Handler_100
+ 406              	>  .set NVIC_Handler_100,Default_Handler
+ 407              		def_irq_handler     NVIC_Handler_101
+ 407              	>  .weak NVIC_Handler_101
+ 407              	>  .set NVIC_Handler_101,Default_Handler
+ 408              		def_irq_handler     NVIC_Handler_102
+ 408              	>  .weak NVIC_Handler_102
+ 408              	>  .set NVIC_Handler_102,Default_Handler
+ 409              		def_irq_handler     NVIC_Handler_103
+ 409              	>  .weak NVIC_Handler_103
+ 409              	>  .set NVIC_Handler_103,Default_Handler
+ 410              		def_irq_handler     NVIC_Handler_104
+ 410              	>  .weak NVIC_Handler_104
+ 410              	>  .set NVIC_Handler_104,Default_Handler
+ 411              		def_irq_handler     NVIC_Handler_105
+ 411              	>  .weak NVIC_Handler_105
+ 411              	>  .set NVIC_Handler_105,Default_Handler
+ 412              		def_irq_handler     NVIC_Handler_106
+ 412              	>  .weak NVIC_Handler_106
+ 412              	>  .set NVIC_Handler_106,Default_Handler
+ 413              		def_irq_handler     NVIC_Handler_107
+ 413              	>  .weak NVIC_Handler_107
+ 413              	>  .set NVIC_Handler_107,Default_Handler
+ 414              		def_irq_handler     NVIC_Handler_108
+ 414              	>  .weak NVIC_Handler_108
+ 414              	>  .set NVIC_Handler_108,Default_Handler
+ 415              		def_irq_handler     NVIC_Handler_109
+ 415              	>  .weak NVIC_Handler_109
+ 415              	>  .set NVIC_Handler_109,Default_Handler
+ 416              		def_irq_handler     NVIC_Handler_110
+ 416              	>  .weak NVIC_Handler_110
+ 416              	>  .set NVIC_Handler_110,Default_Handler
+ 417              		def_irq_handler     NVIC_Handler_111
+ 417              	>  .weak NVIC_Handler_111
+ 417              	>  .set NVIC_Handler_111,Default_Handler
+ 418              		def_irq_handler     NVIC_Handler_112
+ 418              	>  .weak NVIC_Handler_112
+ 418              	>  .set NVIC_Handler_112,Default_Handler
+ 419              		def_irq_handler     NVIC_Handler_113
+ 419              	>  .weak NVIC_Handler_113
+ 419              	>  .set NVIC_Handler_113,Default_Handler
+ 420              		def_irq_handler     NVIC_Handler_114
+ 420              	>  .weak NVIC_Handler_114
+ 420              	>  .set NVIC_Handler_114,Default_Handler
+ 421              		def_irq_handler     NVIC_Handler_115
+ 421              	>  .weak NVIC_Handler_115
+ 421              	>  .set NVIC_Handler_115,Default_Handler
+ 422              		def_irq_handler     NVIC_Handler_116
+ 422              	>  .weak NVIC_Handler_116
+ 422              	>  .set NVIC_Handler_116,Default_Handler
+ 423              		def_irq_handler     NVIC_Handler_117
+ 423              	>  .weak NVIC_Handler_117
+ 423              	>  .set NVIC_Handler_117,Default_Handler
+ 424              		def_irq_handler     NVIC_Handler_118
+ 424              	>  .weak NVIC_Handler_118
+ 424              	>  .set NVIC_Handler_118,Default_Handler
+ 425              		def_irq_handler     NVIC_Handler_119
+ARM GAS  /tmp/cc5S5UTJ.s 			page 13
+
+
+ 425              	>  .weak NVIC_Handler_119
+ 425              	>  .set NVIC_Handler_119,Default_Handler
+ 426              		def_irq_handler     NVIC_Handler_120
+ 426              	>  .weak NVIC_Handler_120
+ 426              	>  .set NVIC_Handler_120,Default_Handler
+ 427              		def_irq_handler     NVIC_Handler_121
+ 427              	>  .weak NVIC_Handler_121
+ 427              	>  .set NVIC_Handler_121,Default_Handler
+ 428              		def_irq_handler     NVIC_Handler_122
+ 428              	>  .weak NVIC_Handler_122
+ 428              	>  .set NVIC_Handler_122,Default_Handler
+ 429              		def_irq_handler     NVIC_Handler_123
+ 429              	>  .weak NVIC_Handler_123
+ 429              	>  .set NVIC_Handler_123,Default_Handler
+ 430              		def_irq_handler     NVIC_Handler_124
+ 430              	>  .weak NVIC_Handler_124
+ 430              	>  .set NVIC_Handler_124,Default_Handler
+ 431              		def_irq_handler     NVIC_Handler_125
+ 431              	>  .weak NVIC_Handler_125
+ 431              	>  .set NVIC_Handler_125,Default_Handler
+ 432              		def_irq_handler     NVIC_Handler_126
+ 432              	>  .weak NVIC_Handler_126
+ 432              	>  .set NVIC_Handler_126,Default_Handler
+ 433              		def_irq_handler     NVIC_Handler_127
+ 433              	>  .weak NVIC_Handler_127
+ 433              	>  .set NVIC_Handler_127,Default_Handler
+ 434              		def_irq_handler     NVIC_Handler_128
+ 434              	>  .weak NVIC_Handler_128
+ 434              	>  .set NVIC_Handler_128,Default_Handler
+ 435              		def_irq_handler     NVIC_Handler_129
+ 435              	>  .weak NVIC_Handler_129
+ 435              	>  .set NVIC_Handler_129,Default_Handler
+ 436              		def_irq_handler     NVIC_Handler_130
+ 436              	>  .weak NVIC_Handler_130
+ 436              	>  .set NVIC_Handler_130,Default_Handler
+ 437              	
+ 438 002a 00BF     		.end
+ARM GAS  /tmp/cc5S5UTJ.s 			page 14
+
+
+DEFINED SYMBOLS
+../../main_full/startup_ARMCM4.S:39     .isr_vector:0000000000000000 $d
+../../main_full/startup_ARMCM4.S:44     .isr_vector:0000000000000000 __isr_vector
+../../main_full/startup_ARMCM4.S:43     .isr_vector:0000000000000000 __Vectors
+../../main_full/startup_ARMCM4.S:209    .text:0000000000000000 Reset_Handler
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NMI_Handler
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 HardFault_Handler
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 MemManage_Handler
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 BusFault_Handler
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 UsageFault_Handler
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 DebugMon_Handler
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_WDT
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_001
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_002
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_003
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_004
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_005
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_006
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_007
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_008
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_009
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_010
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_011
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_012
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_013
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_014
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_015
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_016
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_017
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_018
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_019
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_020
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_021
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_022
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_023
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_024
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_025
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_026
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_027
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_028
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_029
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_030
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_031
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_032
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_033
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_034
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_035
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_036
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_037
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_038
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_039
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_040
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_041
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_042
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_043
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_044
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_045
+ARM GAS  /tmp/cc5S5UTJ.s 			page 15
+
+
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_046
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_047
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_048
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_049
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_050
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_051
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_052
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_053
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_054
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_055
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_056
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_057
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_058
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_059
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_060
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_061
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_062
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_063
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_064
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_065
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_066
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_067
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_068
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_069
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_070
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_071
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_072
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_073
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_074
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_075
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_076
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_077
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_078
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_079
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_080
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_081
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_082
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_083
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_084
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_085
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_086
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_087
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_088
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_089
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_090
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_091
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_092
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_093
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_094
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_095
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_096
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_097
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_098
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_099
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_100
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_101
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_102
+ARM GAS  /tmp/cc5S5UTJ.s 			page 16
+
+
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_103
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_104
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_105
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_106
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_107
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_108
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_109
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_110
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_111
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_112
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_113
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_114
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_115
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_116
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_117
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_118
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_119
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_120
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_121
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_122
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_123
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_124
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_125
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_126
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_127
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_128
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_129
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 NVIC_Handler_130
+../../main_full/startup_ARMCM4.S:203    .text:0000000000000000 $t
+../../main_full/startup_ARMCM4.S:208    .text:0000000000000000 _start
+../../main_full/startup_ARMCM4.S:276    .text:000000000000001a $d
+../../main_full/startup_ARMCM4.S:276    .text:000000000000001c $d
+../../main_full/startup_ARMCM4.S:279    .text:0000000000000028 $t
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 Default_Handler
+../../main_full/startup_ARMCM4.S:283    .text:0000000000000028 DEF_IRQHandler
+
+UNDEFINED SYMBOLS
+__SRAM_segment_end__
+SVC_Handler
+PendSV_Handler
+SysTick_Handler
+__bss_start__
+__bss_end__
+main

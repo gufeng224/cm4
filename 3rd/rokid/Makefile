@@ -1,0 +1,5 @@
+LOCAL_INC_DIRS = ./
+LOCAL_SRC_DIRS = ./
+LOCAL_LIB_DIRS = ./
+
+LOCAL_LIBS = libVQ.a

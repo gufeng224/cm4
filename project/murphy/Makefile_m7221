@@ -1,0 +1,563 @@
+#=============================================================================#
+# toolchain configuration
+#=============================================================================#
+
+TOOLCHAIN = arm-none-eabi-
+
+CXX = $(TOOLCHAIN)g++
+CC = $(TOOLCHAIN)gcc
+AR = $(TOOLCHAIN)ar
+AS = $(TOOLCHAIN)gcc -x assembler-with-cpp
+OBJCOPY = $(TOOLCHAIN)objcopy
+OBJDUMP = $(TOOLCHAIN)objdump
+SIZE = $(TOOLCHAIN)size
+RM = rm -rf
+
+#=============================================================================#
+# project configuration
+#=============================================================================#
+
+# project name
+PROJECT = m7221
+
+# fpga/asic version
+VERSION = ASIC
+
+# core type
+CORE = cortex-m4
+
+# dsp library support
+DSP_LIB = 1
+
+# VQ solution
+VQ = rokid
+
+# VP solution
+#VP = SmartTV_Mstar
+
+# VAD solution
+#VAD = Dct4
+
+# linker script
+LD_SCRIPT = scatter_m7221.ld
+
+# user defined
+
+# output folder (absolute or relative path, leave empty for in-tree compilation)
+OUT_DIR = out
+
+# global definitions for C++, C and ASM (e.g. "symbol_with_value=0xDEAD symbol_without_value")
+GLOBAL_DEFS = CONFIG_BENCH=0
+GLOBAL_DEFS +=  CONFIG_SYS_DBG_LEVEL=0xFFFFFFFF
+#GLOBAL_DEFS +=  CONFIG_APP_HEAP_KBYTES=80
+GLOBAL_DEFS +=  CONFIG_VOC_MIC=6
+
+# C++ definitions
+CXX_DEFS =
+
+# C definitions
+#C_DEFS += CONFIG_AUD_AMIC
+#C_DEFS += CONFIG_AUD_HWGAIN
+C_DEFS += CONFIG_AUD_I2S
+C_DEFS += CONFIG_AUD_AEC
+#C_DEFS += CONFIG_SYS_UART_EXT
+#C_DEFS += CONFIG_SYS_UART_DISABLE
+#C_DEFS += CONFIG_VOC_DKWS
+#C_DEFS += CONFIG_VOC_SEAMLESS
+#C_DEFS += CONFIG_VOC_CUS0
+C_DEFS += CONFIG_VOC_MIC_MAPPING
+C_DEFS += CONFIG_VOC_SWHPF
+#C_DEFS += CONFIG_VOC_READBIN
+#C_DEFS += CONFIG_VOC_SW_SRC
+C_DEFS += CONFIG_VOC_SW_SRC48K
+#C_DEFS += CONFIG_VOC_TEST
+#C_DEFS += CONFIG_VOC_TUNE
+#C_DEFS += CONFIG_AUD_REFEXT
+
+# ASM definitions
+AS_DEFS =
+
+# Make file name
+MAKEFILE = $(firstword $(MAKEFILE_LIST))
+
+# include directories (absolute or relative paths to additional folders with
+# headers, current folder is always included)
+INC_DIRS = .
+INC_DIRS += ../../kernel/FreeRTOS/Source/include
+INC_DIRS += ../../kernel/FreeRTOS/Source/portable/GCC/ARM_CM4F
+INC_DIRS += ../../kernel/FreeRTOS/Demo/Common/include
+INC_DIRS += ../../kernel/FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI
+INC_DIRS += ../../peripheral_library/inc
+INC_DIRS += ../../peripheral_library/hal/$(PROJECT)/inc
+INC_DIRS += ../../CMSIS
+INC_DIRS += ../../main_full
+INC_DIRS += $(VP_INC_DIRS) $(VQ_INC_DIRS)
+
+# library directories (absolute or relative paths to additional folders with
+# libraries)
+LIB_DIRS = $(OUT_DIR)
+USER_LIBS = $(VQ_LIB_F) $(VP_LIB_F)
+
+# libraries (additional libraries for linking, e.g. "-lm -lsome_name" to link
+# math library libm.a and libsome_name.a)
+ifeq ($(DSP_LIB), 1)
+  C_DEFS += ARM_MATH_CM4
+  LIB_DIRS += ../../CMSIS
+  USER_LIBS += ../../CMSIS/libarm_cortexM4lf_math.a
+  LIBS += -larm_cortexM4lf_math
+endif
+
+ifeq ($(VAD),Crnn)
+  C_DEFS += CONFIG_VOC_SW_VAD
+  INC_DIRS += ../../3rd/vadcrnn
+  LIB_DIRS += ../../3rd/vadcrnn/lib
+  USER_LIBS += ../../3rd/vadcrnn/lib/libvadcrnn.a
+  LIBS += -lvadcrnn
+else ifeq ($(VAD),Dct4)
+  C_DEFS += CONFIG_VOC_SW_VAD VAD_DCT4
+endif
+
+# additional directories with source files (absolute or relative paths to
+# folders with source files, current folder is always included)
+SRCS_DIRS += ../../kernel/FreeRTOS/Source
+SRCS_DIRS += ../../kernel/FreeRTOS/Source/portable/GCC/ARM_CM4F
+SRCS_DIRS += ../../kernel/FreeRTOS/Source/portable/MemMang
+SRCS_DIRS += ../../kernel/FreeRTOS/Demo/Common/Minimal
+SRCS_DIRS += ../../kernel/FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI
+SRCS_DIRS += ../../kernel/FreeRTOS-Plus/Demo/Common/FreeRTOS_Plus_CLI_Demos
+SRCS_DIRS += ../../peripheral_library/sys
+SRCS_DIRS += ../../peripheral_library/api
+SRCS_DIRS += ../../peripheral_library/drv
+SRCS_DIRS += ../../peripheral_library/hal/$(PROJECT)/src
+SRCS_DIRS += ../../main_full
+SRCS_DIRS += $(VQ_SRC_DIRS) $(VP_SRC_DIRS) $(VP_LIB_DIRS) $(VQ_LIB_DIRS)
+
+# extension of C++ files
+CXX_EXT = cpp
+
+# wildcard for C++ source files (all files with CXX_EXT extension found in
+# current folder and SRCS_DIRS folders will be compiled and linked)
+CXX_SRCS = $(wildcard $(patsubst %, %/*.$(CXX_EXT), . $(SRCS_DIRS)))
+
+# extension of C files
+C_EXT = c
+
+# wildcard for C source files (all files with C_EXT extension found in current
+# folder and SRCS_DIRS folders will be compiled and linked)
+#C_SRCS = $(wildcard $(patsubst %, %/*.$(C_EXT), . $(SRCS_DIRS)))
+
+C_SRCS = event_groups.c
+C_SRCS += list.c
+C_SRCS += queue.c
+C_SRCS += tasks.c
+C_SRCS += timers.c
+C_SRCS += heap_4.c
+C_SRCS += port.c
+C_SRCS += stream_buffer.c
+
+#C_SRCS += system.c
+#C_SRCS += system_Cleveland.c
+
+#C_SRCS += main_full.c
+#C_SRCS += RegTest.c
+#C_SRCS += flop.c
+#C_SRCS += EventGroupsDemo.c
+#C_SRCS += TaskNotify.c
+#C_SRCS += blocktim.c
+#C_SRCS += dynamic.c
+#C_SRCS += GenQTest.c
+#C_SRCS += TimerDemo.c
+#C_SRCS += IntQueue.c
+#C_SRCS += IntQueueTimer.c
+#C_SRCS += countsem.c
+#C_SRCS += semtest.c
+#C_SRCS += death.c
+#C_SRCS += StaticAllocation.c
+
+#C_SRCS += printf-stdarg.c
+#C_SRCS += comtest_strings.c
+C_SRCS += _sbrk.c
+
+C_SRCS += FreeRTOS_CLI.c
+C_SRCS += UARTCommandConsole.c
+C_SRCS += Sample-CLI-commands.c
+
+C_SRCS += drvUART.c
+C_SRCS += drvSerial.c
+C_SRCS += drvAudio.c
+C_SRCS += drvBDMA.c
+#C_SRCS += drvTimer.c
+C_SRCS += drvMBX.c
+C_SRCS += drvINTC.c
+C_SRCS += drvPM.c
+C_SRCS += drvCPU.c
+
+C_SRCS += halAudio.c
+C_SRCS += halUART.c
+C_SRCS += halMBX.c
+C_SRCS += halTimer.c
+C_SRCS += halINTC.c
+C_SRCS += halCPUINT.c
+C_SRCS += halBDMA.c
+C_SRCS += halPM.c
+C_SRCS += halCPU.c
+C_SRCS += halRTC.c
+
+C_SRCS += apiSRC.c
+C_SRCS += apiVOC.c
+C_SRCS += apiVQ.c
+C_SRCS += apiVP.c
+C_SRCS += apiVAD.c
+C_SRCS += mosWrapper.c
+C_SRCS += voc_task.c
+C_SRCS += mbx_task.c
+
+#C_SRCS += main_audio_test.c
+#C_SRCS += main_audio.c
+
+ifeq ($(BENCH),2)
+C_SRCS += main_benchmark.c
+else
+C_SRCS += main.c
+endif
+
+# extension of ASM files
+AS_EXT = S
+
+# wildcard for ASM source files (all files with AS_EXT extension found in
+# current folder and SRCS_DIRS folders will be compiled and linked)
+#AS_SRCS = $(wildcard $(patsubst %, %/*.$(AS_EXT), . $(SRCS_DIRS)))
+
+AS_SRCS = startup_ARMCM4.S
+
+# optimization flags ("-O0" - no optimization, "-O1" - optimize, "-O2" -
+# optimize even more, "-Os" - optimize for size or "-O3" - optimize yet more)
+OPTIMIZATION = -O3
+ #-Os
+
+# set to 1 to optimize size by removing unused code and data during link phase
+REMOVE_UNUSED = 1
+
+# set to 1 to compile and link additional code required for C++
+USES_CXX = 0
+
+# define warning options here
+CXX_WARNINGS = -Wall -Wextra
+C_WARNINGS = -Wall -Wstrict-prototypes -Wextra
+
+# C++ language standard ("c++98", "gnu++98" - default, "c++0x", "gnu++0x")
+CXX_STD = gnu++98
+
+# C language standard ("c89" / "iso9899:1990", "iso9899:199409",
+# "c99" / "iso9899:1999", "gnu89" - default, "gnu99")
+C_STD = gnu89
+
+#=============================================================================#
+# set the VPATH according to SRCS_DIRS
+#=============================================================================#
+
+VPATH = $(SRCS_DIRS)
+
+#=============================================================================#
+# when using output folder, append trailing slash to its name
+#=============================================================================#
+
+ifeq ($(strip $(OUT_DIR)), )
+	OUT_DIR_F =
+else
+	OUT_DIR_F = $(strip $(OUT_DIR))/
+endif
+
+#=============================================================================#
+# various compilation flags
+#=============================================================================#
+#-c -mcpu=cortex-m4 -mthumb -gdwarf-2 -MD -pedantic -O0 -mapcs-frame -mthumb-interwork
+#-mfloat-abi=softfp -mfpu=fpv4-sp-d16 -ffunction-sections -fdata-sections -g
+#-I.\RTE\_RTOSDemo_GCC
+#-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM4\Include
+#-IC:\Keil_v5\ARM\CMSIS\Include -I"C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q1-update\arm-none-eabi\include"
+#-I"C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q1-update\lib\gcc\arm-none-eabi\6.3.1\include"
+#-I"C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q1-update\arm-none-eabi\include\c++\6.3.1"
+#-I"C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q1-update\arm-none-eabi\include\c++\6.3.1\arm-none-eabi"
+#-D__UVISION_VERSION="523" -D__GCC -D__GCC_VERSION="631" -DARMCM4_FP -Wa,-alhms=".\Listings\*.lst" -o *.o
+
+#-mcpu=cortex-m4 -mthumb -gdwarf-2 -mthumb-interwork --MD *.d
+#-I.\RTE\_RTOSDemo_GCC
+#-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM4\Include
+#-IC:\Keil_v5\ARM\CMSIS\Include
+#-I"C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q1-update\arm-none-eabi\include"
+#-I"C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q1-update\lib\gcc\arm-none-eabi\6.3.1\include"
+#-I"C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q1-update\arm-none-eabi\include\c++\6.3.1"
+#-I"C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q1-update\arm-none-eabi\include\c++\6.3.1\arm-none-eabi"
+#-alhms=".\Listings\*.lst" -o *.o
+
+
+# core flags
+CORE_FLAGS = -mcpu=$(CORE) -mthumb -mthumb-interwork -specs=nano.specs -specs=nosys.specs
+
+# flags for C++ compiler
+CXX_FLAGS = -std=$(CXX_STD) -g -ggdb3 -fno-rtti -fno-exceptions -fverbose-asm -Wa,-ahlms=$(OUT_DIR_F)$(notdir $(<:.$(CXX_EXT)=.lst))
+
+# flags for C compiler
+C_FLAGS = -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -std=$(C_STD) -g -ggdb3 -fverbose-asm -Wa,-ahlms=$(OUT_DIR_F)$(notdir $(<:.$(C_EXT)=.lst))
+
+# flags for assembler
+AS_FLAGS = -g -ggdb3 -Wa,-amhls=$(OUT_DIR_F)$(notdir $(<:.$(AS_EXT)=.lst))
+
+# flags for linker
+LD_FLAGS = -T$(OUT_DIR_F)$(LD_SCRIPT) -g -Wl,-Map=$(OUT_DIR_F)$(PROJECT).map,--cref,--no-warn-mismatch,--undefined=test123
+
+# process option for removing unused code
+ifeq ($(REMOVE_UNUSED), 1)
+	LD_FLAGS += -Wl,--gc-sections
+	OPTIMIZATION += -ffunction-sections -fdata-sections -fno-builtin-printf
+endif
+
+# if __USES_CXX is defined for ASM then code for global/static constructors /
+# destructors is compiled; if -nostartfiles option for linker is added then C++
+# initialization / finalization code is not linked
+ifeq ($(USES_CXX), 1)
+	AS_DEFS += __USES_CXX
+else
+	LD_FLAGS += -nostartfiles
+endif
+
+ifeq ($(VERSION),FPGA)
+#LD_SCRIPT := lds_FPGA.txt
+C_DEFS += BOOTROM_VERSION_FPGA
+endif
+
+ifeq ($(VERSION),ASIC)
+#LD_SCRIPT := lds_ASIC.txt
+C_DEFS += BOOTROM_VERSION_ASIC
+endif
+
+ifeq ($(VERSION),QFP)
+#LD_SCRIPT := lds_QFP.txt
+C_DEFS += BOOTROM_VERSION_QFP
+endif
+
+ifneq ($(strip $(VQ)), )
+include ../../3rd/$(VQ)/Makefile
+VQ_INC_DIRS := $(patsubst %, ../../3rd/$(VQ)/%, $(LOCAL_INC_DIRS))
+VQ_SRC_DIRS := $(patsubst %, ../../3rd/$(VQ)/%, $(LOCAL_SRC_DIRS))
+VQ_LIB_DIRS := $(patsubst %, ../../3rd/$(VQ)/%, $(LOCAL_LIB_DIRS))
+VQ_OBJS := $(addprefix $(OUT_DIR_F), $(notdir $(LOCAL_C_SRCS:.$(C_EXT)=.o)))
+VQ_LIBS := $(LOCAL_LIBS)
+VQ_LIB_F := $(OUT_DIR_F)libVQ.a
+VQ_LD_FLAG := -Wl,--whole-archive -lVQ -Wl,--no-whole-archive
+endif
+
+ifneq ($(strip $(VP)), )
+include ../../3rd/$(VP)/Makefile
+VP_INC_DIRS := $(patsubst %, ../../3rd/$(VP)/%, $(LOCAL_INC_DIRS))
+VP_SRC_DIRS := $(patsubst %, ../../3rd/$(VP)/%, $(LOCAL_SRC_DIRS))
+VP_LIB_DIRS := $(patsubst %, ../../3rd/$(VP)/%, $(LOCAL_LIB_DIRS))
+VP_OBJS := $(addprefix $(OUT_DIR_F), $(notdir $(LOCAL_C_SRCS:.$(C_EXT)=.o)))
+VP_LIBS := $(LOCAL_LIBS)
+VP_LIB_F := $(OUT_DIR_F)libVP.a
+VP_LD_FLAG := -Wl,--whole-archive -lVP -Wl,--no-whole-archive
+endif
+
+#=============================================================================#
+# do some formatting
+#=============================================================================#
+
+CXX_OBJS = $(addprefix $(OUT_DIR_F), $(notdir $(CXX_SRCS:.$(CXX_EXT)=.o)))
+C_OBJS = $(addprefix $(OUT_DIR_F), $(notdir $(C_SRCS:.$(C_EXT)=.o)))
+AS_OBJS = $(addprefix $(OUT_DIR_F), $(notdir $(AS_SRCS:.$(AS_EXT)=.o)))
+OBJS = $(AS_OBJS) $(C_OBJS) $(CXX_OBJS) $(USER_OBJS)
+DEPS = $(OBJS:.o=.d)
+INC_DIRS_F = -I. $(patsubst %, -I%, $(INC_DIRS)) $(patsubst %, -I$(TOP)/%, $(INC_DIRS))
+LIB_DIRS_F = $(patsubst %, -L%, $(LIB_DIRS))
+GLOBAL_DEFS_F = $(patsubst %, -D%, $(GLOBAL_DEFS))
+CXX_DEFS_F = $(patsubst %, -D%, $(CXX_DEFS))
+C_DEFS_F = $(patsubst %, -D%, $(C_DEFS))
+AS_DEFS_F = $(patsubst %, -D%, $(AS_DEFS))
+
+ELF = $(OUT_DIR_F)$(PROJECT).elf
+HEX = $(OUT_DIR_F)$(PROJECT).hex
+BIN = $(OUT_DIR_F)$(PROJECT).bin
+LSS = $(OUT_DIR_F)$(PROJECT).lss
+DMP = $(OUT_DIR_F)$(PROJECT).dmp
+
+# format final flags for tools, request dependancies for C++, C and asm
+CXX_FLAGS_F = $(CORE_FLAGS) $(OPTIMIZATION) $(CXX_WARNINGS) $(CXX_FLAGS) $(GLOBAL_DEFS_F) $(CXX_DEFS_F) -MD -MP -MF $(OUT_DIR_F)$(@F:.o=.d) $(INC_DIRS_F)
+C_FLAGS_F = $(CORE_FLAGS) $(OPTIMIZATION) $(C_WARNINGS) $(C_FLAGS) $(GLOBAL_DEFS_F) $(C_DEFS_F) -MD -MP -MF $(OUT_DIR_F)$(@F:.o=.d) $(INC_DIRS_F)
+AS_FLAGS_F = $(CORE_FLAGS) $(AS_FLAGS) $(GLOBAL_DEFS_F) $(AS_DEFS_F) -MD -MP -MF $(OUT_DIR_F)$(@F:.o=.d) $(INC_DIRS_F)
+LD_FLAGS_F = $(CORE_FLAGS) $(LD_FLAGS) $(LIB_DIRS_F) $(VP_LD_FLAG) $(VQ_LD_FLAG)
+
+#contents of output directory
+GENERATED = $(wildcard $(patsubst %, $(OUT_DIR_F)*.%, bin d dmp elf hex lss lst map o a))
+
+#=============================================================================#
+# commit version
+#=============================================================================#
+
+# commit id / branch version
+COMMITNUMBER := g$(shell git log --format=%h -n 1 2> /dev/null)
+BRANCH_ID := $(shell git rev-parse --abbrev-ref HEAD 2> /dev/null | sed -e 's/\//_/g')
+
+ifeq ($(COMMITNUMBER),g)
+file := gitInformation.txt
+gitLog := $(shell strings ${file})
+gitTemp := $(subst \#, ,$(gitLog))
+COMMITNUMBER := g$(word 1, $(gitTemp))
+BRANCH_ID := g$(word 2, $(gitTemp))
+endif
+#=============================================================================#
+# make all
+#=============================================================================#
+
+all : make_output_dir VERSION $(ELF) $(LSS) $(DMP) $(HEX) $(BIN) print_size
+
+# make object files dependent on Makefile
+$(OBJS) : Makefile
+# make .elf file dependent on linker script
+$(ELF) : $(LD_SCRIPT)
+
+#-----------------------------------------------------------------------------#
+# VP/VQ - objects -> archive
+#-----------------------------------------------------------------------------#
+#ld -r -o libfinal.a wrapper.o -L. -lstatic
+
+$(VQ_LIB_F) : $(VQ_OBJS) $(VQ_LIBS)
+	mkdir -p $(OUT_DIR_F)$(VQ)
+	cp $^ $(OUT_DIR_F)$(VQ)
+	cd $(OUT_DIR_F)$(VQ); $(AR) x $(VQ_LIBS)
+	$(AR) rc $@ $(OUT_DIR_F)$(VQ)/*.o
+
+$(VP_LIB_F) : $(VP_OBJS) $(VP_LIBS)
+	mkdir -p $(OUT_DIR_F)$(VP)
+	cp $^ $(OUT_DIR_F)$(VP)
+	cd $(OUT_DIR_F)$(VP); $(AR) x $(VP_LIBS)
+	$(AR) rc $@ $(OUT_DIR_F)$(VP)/*.o
+
+#-----------------------------------------------------------------------------#
+# linking - objects -> elf
+#-----------------------------------------------------------------------------#
+
+$(ELF) : $(OBJS) $(VP_LIB_F) $(VQ_LIB_F)
+	@echo 'Linking target: $(ELF)'
+	$(CC) -E -x c $(C_FLAGS_F) $(LD_SCRIPT) | grep -v '^#' >$(OUT_DIR_F)$(LD_SCRIPT)
+	$(CXX) $(LD_FLAGS_F) $(OBJS) $(LIBS) -o $@
+	@echo ' '
+
+#-----------------------------------------------------------------------------#
+# compiling - C++ source -> objects
+#-----------------------------------------------------------------------------#
+
+$(OUT_DIR_F)%.o : %.$(CXX_EXT)
+	@echo 'Compiling file: $<'
+	$(CXX) -c $(CXX_FLAGS_F) $< -o $@
+	@echo ' '
+
+#-----------------------------------------------------------------------------#
+# compiling - C source -> objects
+#-----------------------------------------------------------------------------#
+
+$(OUT_DIR_F)%.o : %.$(C_EXT)
+	@echo 'Compiling file: $<'
+	$(CC) -c $(C_FLAGS_F) $< -o $@
+	@echo ' '
+
+#-----------------------------------------------------------------------------#
+# assembling - ASM source -> objects
+#-----------------------------------------------------------------------------#
+
+$(OUT_DIR_F)%.o : %.$(AS_EXT)
+	@echo 'Assembling file: $<'
+	$(AS) -c $(AS_FLAGS_F) $< -o $@
+	@echo ' '
+
+#-----------------------------------------------------------------------------#
+# memory images - elf -> hex, elf -> bin
+#-----------------------------------------------------------------------------#
+
+$(HEX) : $(ELF)
+	@echo 'Creating IHEX image: $(HEX)'
+	$(OBJCOPY) -O ihex $< $@
+	@echo ' '
+
+$(BIN) : $(ELF)
+	@echo 'Creating binary image: $(BIN)'
+	$(OBJCOPY) -O binary $< $@
+	$(OBJCOPY) -O binary $< ../../tools/fwCM4.bin
+	$(OBJCOPY) -O binary out/version.o ../../tools/version.bin
+	@echo ' '
+	@rm -rf ../../tools/fwCM4.dat
+	@perl ../../tools/pack.pl ../../tools/version.bin ../../tools/fwCM4.bin ../../tools/fwCM4pack.bin
+	@perl ../../tools/bin2hex.pl ../../tools/fwCM4.bin 1 >> ../../tools/fwCM4.dat
+	@perl ../../tools/bin2hex.pl ../../tools/fwCM4pack.bin 1 >> ../../tools/fwCM4pack.dat
+	@echo 'bin2hex'
+
+#-----------------------------------------------------------------------------#
+# memory dump - elf -> dmp
+#-----------------------------------------------------------------------------#
+
+$(DMP) : $(ELF)
+	@echo 'Creating memory dump: $(DMP)'
+	$(OBJDUMP) -x --syms $< > $@
+	@echo ' '
+
+#-----------------------------------------------------------------------------#
+# extended listing - elf -> lss
+#-----------------------------------------------------------------------------#
+
+$(LSS) : $(ELF)
+	@echo 'Creating extended listing: $(LSS)'
+	$(OBJDUMP) -S $< > $@
+	@echo ' '
+
+#-----------------------------------------------------------------------------#
+# print the size of the objects and the .elf file
+#-----------------------------------------------------------------------------#
+
+print_size :
+	@echo 'Size of modules:'
+	$(SIZE) -B -t --common $(OBJS) $(USER_OBJS) $(USER_LIBS)
+	@echo ' '
+	@echo 'Size of target .elf file:'
+	$(SIZE) -B $(ELF)
+	@echo ' '
+
+#-----------------------------------------------------------------------------#
+# create the desired output directory
+#-----------------------------------------------------------------------------#
+
+make_output_dir :
+	$(shell mkdir $(OUT_DIR_F) 2>/dev/null)
+
+#=============================================================================#
+# make clean
+#=============================================================================#
+
+clean:
+ifeq ($(strip $(OUT_DIR_F)), )
+	@echo 'Removing all generated output files'
+else
+	@echo 'Removing all generated output files from output directory: $(OUT_DIR_F)'
+endif
+ifneq ($(strip $(GENERATED)), )
+	$(RM) $(GENERATED) $(OUT_DIR_F)
+
+else
+	@echo 'Nothing to remove...'
+endif
+
+#=============================================================================#
+# global exports
+#=============================================================================#
+
+.PHONY: all clean dependents
+
+.SECONDARY:
+
+# include dependancy files
+-include $(DEPS)
+
+VERSION :
+	@python ../../tools/ms_gen_mvxv_h.py ../../peripheral_library/inc/ms_version.h --changelist $(COMMITNUMBER) --mkfile $(MAKEFILE) --project $(PROJECT) --branch $(BRANCH_ID)
+	@echo 'Compiling file:version.o'
+	$(CC) -c $(CORE_FLAGS) $(INC_DIRS_F) ../../peripheral_library/sys/version.c -o $(OUT_DIR_F)version.o
+	@echo ' '

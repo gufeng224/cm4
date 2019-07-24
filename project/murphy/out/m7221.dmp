@@ -1,0 +1,1074 @@
+
+out/m7221.elf:     file format elf32-littlearm
+out/m7221.elf
+architecture: armv7e-m, flags 0x00000112:
+EXEC_P, HAS_SYMS, D_PAGED
+start address 0x00000251
+
+Program Header:
+    LOAD off    0x00010000 vaddr 0x00000000 paddr 0x00000000 align 2**16
+         filesz 0x0005c6bc memsz 0x0005cabc flags rwx
+private flags = 5000200: [Version5 EABI] [soft-float ABI]
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .isr_vector   0000024c  00000000  00000000  00010000  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  1 .text         0000b37c  00000250  00000250  00010250  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .rodata       00001044  0000b5d0  0000b5d0  0001b5d0  2**3
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  3 .data         0000046c  0000c614  0000c614  0001c614  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  4 .bss          00024e64  0000ca80  0000ca80  0001ca80  2**3
+                  ALLOC
+  5 .dma_buffer   00009000  00031900  00031900  00041900  2**6
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .msp          00000400  0003a900  0003a900  0004a900  2**0
+                  ALLOC
+  7 .dsp_bss      00000000  0003ad00  0003ad00  0006c6bc  2**0
+                  CONTENTS
+  8 .dsp_text_data 00000118  0003ad00  0003ad00  0004ad00  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  9 .vp_bss       00000000  0003ae18  0003ae18  0006c6bc  2**0
+                  CONTENTS
+ 10 .vp_text_data 00000000  0003ae18  0003ae18  0006c6bc  2**0
+                  CONTENTS
+ 11 .vq_bss       00007e94  0003ae18  0003ae18  0004ae18  2**2
+                  ALLOC
+ 12 .vq_text_data 0001960c  00042cac  00042cac  00052cac  2**2
+                  CONTENTS, ALLOC, LOAD, CODE
+ 13 .noinit       00000000  0005c2b8  0005c2b8  0006c6bc  2**0
+                  CONTENTS
+ 14 .heap         00000400  0005c2b8  0005c2b8  0006c2b8  2**0
+                  ALLOC
+ 15 .bin_end      00000004  0005c6b8  0005c6b8  0006c6b8  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+ 16 ._check_stack 00000400  0005c6bc  0005c6bc  0006c6bc  2**0
+                  ALLOC
+ 17 ._check_rom_log 00000000  0005cabc  0005cabc  0006c6bc  2**0
+                  CONTENTS
+ 18 .stab         0000009c  00000000  00000000  0006c6bc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 19 .stabstr      0000014d  00000000  00000000  0006c758  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 20 .comment      0000014b  00000000  00000000  0006c8a5  2**0
+                  CONTENTS, READONLY
+ 21 .ARM.attributes 00000030  00000000  00000000  0006c9f0  2**0
+                  CONTENTS, READONLY
+ 22 .debug_aranges 00000fc0  00000000  00000000  0006ca20  2**3
+                  CONTENTS, READONLY, DEBUGGING
+ 23 .debug_info   0002d201  00000000  00000000  0006d9e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 24 .debug_abbrev 00006a64  00000000  00000000  0009abe1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 25 .debug_line   0001dccb  00000000  00000000  000a1645  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 26 .debug_frame  000044f0  00000000  00000000  000bf310  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 27 .debug_str    00023807  00000000  00000000  000c3800  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 28 .debug_loc    00017b71  00000000  00000000  000e7007  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 29 .debug_ranges 00002e90  00000000  00000000  000feb78  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 30 .debug_macro  0000b563  00000000  00000000  00101a08  2**0
+                  CONTENTS, READONLY, DEBUGGING
+SYMBOL TABLE:
+00000000 l    d  .isr_vector	00000000 .isr_vector
+00000250 l    d  .text	00000000 .text
+0000b5d0 l    d  .rodata	00000000 .rodata
+0000c614 l    d  .data	00000000 .data
+0000ca80 l    d  .bss	00000000 .bss
+00031900 l    d  .dma_buffer	00000000 .dma_buffer
+0003a900 l    d  .msp	00000000 .msp
+0003ad00 l    d  .dsp_bss	00000000 .dsp_bss
+0003ad00 l    d  .dsp_text_data	00000000 .dsp_text_data
+0003ae18 l    d  .vp_bss	00000000 .vp_bss
+0003ae18 l    d  .vp_text_data	00000000 .vp_text_data
+0003ae18 l    d  .vq_bss	00000000 .vq_bss
+00042cac l    d  .vq_text_data	00000000 .vq_text_data
+0005c2b8 l    d  .noinit	00000000 .noinit
+0005c2b8 l    d  .heap	00000000 .heap
+0005c6b8 l    d  .bin_end	00000000 .bin_end
+0005c6bc l    d  ._check_stack	00000000 ._check_stack
+0005cabc l    d  ._check_rom_log	00000000 ._check_rom_log
+00000000 l    d  .stab	00000000 .stab
+00000000 l    d  .stabstr	00000000 .stabstr
+00000000 l    d  .comment	00000000 .comment
+00000000 l    d  .ARM.attributes	00000000 .ARM.attributes
+00000000 l    d  .debug_aranges	00000000 .debug_aranges
+00000000 l    d  .debug_info	00000000 .debug_info
+00000000 l    d  .debug_abbrev	00000000 .debug_abbrev
+00000000 l    d  .debug_line	00000000 .debug_line
+00000000 l    d  .debug_frame	00000000 .debug_frame
+00000000 l    d  .debug_str	00000000 .debug_str
+00000000 l    d  .debug_loc	00000000 .debug_loc
+00000000 l    d  .debug_ranges	00000000 .debug_ranges
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    df *ABS*	00000000 out/startup_ARMCM4.o
+00000000 l    df *ABS*	00000000 event_groups.c
+00000000 l    df *ABS*	00000000 list.c
+00000000 l    df *ABS*	00000000 queue.c
+00000524 l     F .text	00000078 prvCopyDataToQueue
+0000059c l     F .text	0000007a prvNotifyQueueSetContainer
+00000618 l     F .text	00000122 prvUnlockQueue
+00000000 l    df *ABS*	00000000 tasks.c
+00001034 l     F .text	00000120 prvAddNewTaskToReadyList
+0000173c l     F .text	00000150 prvIdleTask
+000015fc l     F .text	00000120 xTaskResumeAll.part.8
+0000ca84 l     O .bss	00000004 pxDelayedTaskList
+0000ca88 l     O .bss	00000004 pxOverflowDelayedTaskList
+0000ca8c l     O .bss	00000064 pxReadyTasksLists
+0000caf0 l     O .bss	00000004 uxCurrentNumberOfTasks
+0000caf4 l     O .bss	00000004 uxDeletedTasksWaitingCleanUp
+0000caf8 l     O .bss	00000004 uxPendedTicks
+0000cafc l     O .bss	00000004 uxSchedulerSuspended
+0000cb00 l     O .bss	00000004 uxTaskNumber
+0000cb04 l     O .bss	00000004 uxTopReadyPriority
+0000cb08 l     O .bss	00000014 xDelayedTaskList1
+0000cb1c l     O .bss	00000014 xDelayedTaskList2
+0000cb30 l     O .bss	00000004 xNextTaskUnblockTime
+0000cb34 l     O .bss	00000004 xNumOfOverflows
+0000cb38 l     O .bss	00000014 xPendingReadyList
+0000cb4c l     O .bss	00000004 xSchedulerRunning
+0000cb50 l     O .bss	00000014 xSuspendedTaskList
+0000cb64 l     O .bss	00000014 xTasksWaitingTermination
+0000cb78 l     O .bss	00000004 xTickCount
+0000cb7c l     O .bss	00000004 xYieldPending
+00000000 l    df *ABS*	00000000 timers.c
+000021b4 l     F .text	00000098 prvSwitchTimerLists
+0000224c l     F .text	0000025c prvTimerTask
+0000cb80 l     O .bss	00000004 pxCurrentTimerList
+0000cb84 l     O .bss	00000004 pxOverflowTimerList
+0000cb88 l     O .bss	00000050 ucStaticTimerQueueStorage.6903
+0000cbd8 l     O .bss	00000014 xActiveTimerList1
+0000cbec l     O .bss	00000014 xActiveTimerList2
+0000cc00 l     O .bss	00000004 xLastTime.6852
+0000cc04 l     O .bss	00000054 xStaticTimerQueue.6902
+0000cc58 l     O .bss	00000004 xTimerQueue
+0000cc5c l     O .bss	00000004 xTimerTaskHandle
+00000000 l    df *ABS*	00000000 heap_4.c
+0000cc64 l     O .bss	00014000 ucHeap
+0000cc60 l     O .bss	00000004 pxEnd
+00020c64 l     O .bss	00000004 xBlockAllocatedBit
+00020c68 l     O .bss	00000004 xFreeBytesRemaining
+00020c6c l     O .bss	00000004 xMinimumEverFreeBytesRemaining
+00020c70 l     O .bss	00000008 xStart
+00000000 l    df *ABS*	00000000 port.c
+00002768 l     F .text	00000022 prvPortStartFirstTask
+00002790 l     F .text	0000000e vPortEnableVFP
+000027a4 l     F .text	00000040 prvTaskExitError
+00002830 l       .text	00000000 pxCurrentTCBConst2
+00002900 l       .text	00000000 pxCurrentTCBConst
+00020c78 l     O .bss	00000001 ucMaxSysCallPriority
+00020c7c l     O .bss	00000004 ulMaxPRIGROUPValue
+00020c80 l     O .bss	00000004 ulStoppedTimerCompensation
+00020c84 l     O .bss	00000004 ulTimerCountsForOneTick
+00020c88 l     O .bss	00000004 xMaximumPossibleSuppressedTicks
+0000c614 l     O .data	00000004 uxCriticalNesting
+00000000 l    df *ABS*	00000000 stream_buffer.c
+00002c2c l     F .text	0000009c prvReadBytesFromBuffer
+00002cc8 l     F .text	00000078 prvWriteBytesToBuffer.part.1
+00000000 l    df *ABS*	00000000 _sbrk.c
+00020c8c l     O .bss	00000004 heap.5693
+00000000 l    df *ABS*	00000000 FreeRTOS_CLI.c
+000031bc l     F .text	0000002c prvHelpCommand
+00020c90 l     O .bss	00000400 cOutputBuffer
+00021090 l     O .bss	00000004 pxCommand.6359
+00021094 l     O .bss	00000004 pxCommand.6393
+0000c618 l     O .data	00000008 xRegisteredCommands
+0000b6b8 l     O .rodata	00000010 xHelpCommand
+00000000 l    df *ABS*	00000000 UARTCommandConsole.c
+000032b8 l     F .text	00000118 prvUARTCommandConsoleTask
+00021098 l     O .bss	00000032 cInputString.7364
+000210cc l     O .bss	00000032 cLastInputString.7365
+00021100 l     O .bss	00000004 xTxMutex
+00000000 l    df *ABS*	00000000 drvUART.c
+00003418 l     F .text	00000016 printchar
+0000342e l     F .text	0000008c prints
+000034ba l     F .text	00000096 printi
+00000000 l    df *ABS*	00000000 drvSerial.c
+00021104 l     O .bss	00000004 xCharsForTx
+00021108 l     O .bss	00000004 xRxedChars
+00000000 l    df *ABS*	00000000 drvAudio.c
+00031900 l     O .dma_buffer	00009000 _gMcuDmaBuf
+0002110c l     O .bss	00000001 _bAudAecEnable
+0002110d l     O .bss	00000001 _bAudGenEable
+0002110e l     O .bss	00000001 _eAudMicNo
+0002110f l     O .bss	00000001 _eAudState
+00021110 l     O .bss	00000001 _eAudWidth
+00021114 l     O .bss	00000002 _mgrI2S
+00021118 l     O .bss	00000004 _tAudIntSem
+0002111c l     O .bss	00000004 _tAudMutex
+00021120 l     O .bss	00000004 _u32AudDeltaTime
+0000c620 l     O .data	00000001 _eAudRate
+0000b760 l     O .rodata	00000004 CSWTCH.75
+0000b764 l     O .rodata	00000003 CSWTCH.76
+00000000 l    df *ABS*	00000000 drvBDMA.c
+00000000 l    df *ABS*	00000000 drvMBX.c
+0000c624 l     O .data	0000002c _mgrMBX
+00000000 l    df *ABS*	00000000 drvINTC.c
+00021124 l     O .bss	00000200 _tFiqCtxTbl
+00021324 l     O .bss	00000200 _tIrqCtxTbl
+00000000 l    df *ABS*	00000000 drvPM.c
+00021524 l     O .bss	00000001 _ePMStatus
+00000000 l    df *ABS*	00000000 drvCPU.c
+00021525 l     O .bss	00000001 _eCPUFreq
+00000000 l    df *ABS*	00000000 halAudio.c
+00021528 l     O .bss	00000004 _gnDmaWrBufSize
+0002152c l     O .bss	00000004 _gpDmaWrBuf
+00021530 l     O .bss	00000004 _gpDmaWrPtr
+0000bac0 l     O .rodata	00000008 CSWTCH.53
+0000bac8 l     O .rodata	00000018 _u32SynthRateTbl
+00000000 l    df *ABS*	00000000 halUART.c
+00000000 l    df *ABS*	00000000 halMBX.c
+0000bb58 l     O .rodata	00000008 _u16MbxGroupIdMBXHAL
+00000000 l    df *ABS*	00000000 halTimer.c
+00000000 l    df *ABS*	00000000 halINTC.c
+00000000 l    df *ABS*	00000000 halCPUINT.c
+0000bb60 l     O .rodata	00000020 _u16CPUINTBitMap
+00000000 l    df *ABS*	00000000 halBDMA.c
+00000000 l    df *ABS*	00000000 halPM.c
+00000000 l    df *ABS*	00000000 halCPU.c
+00000000 l    df *ABS*	00000000 apiSRC.c
+000054b4 l     F .text	000003a0 ch6_scale48k
+00005854 l     F .text	000002a8 ch4_scale48k
+00005afc l     F .text	00000124 ch2_scale48k
+00021538 l     O .bss	00000bd0 buffer
+00022108 l     O .bss	00000004 chx_scale48k
+0002210c l     O .bss	00000004 count
+00022110 l     O .bss	00000004 i_ch
+00022114 l     O .bss	00000004 len
+00022118 l     O .bss	00000004 nSrcInitFlag
+0002211c l     O .bss	00000004 order_count
+00022120 l     O .bss	00000004 order_countN2
+00022124 l     O .bss	00000004 rd
+00022128 l     O .bss	00000004 srcp
+0002212c l     O .bss	00000004 wr
+0000c650 l     O .data	000003b4 res_coeff
+00000000 l    df *ABS*	00000000 apiVOC.c
+00022130 l     O .bss	00000004 _tVdMutex
+00022134 l     O .bss	00000002 _u16CountToNotify
+00022136 l     O .bss	00000002 _u16MaxToNotify
+00022138 l     O .bss	00000004 _u32ACPUBufferAddr
+0002213c l     O .bss	00000004 _u32ACPUBufferPtr
+00022140 l     O .bss	00000004 _u32ACPUBufferSize
+00022144 l     O .bss	00000004 _u32PeriodCount
+00000000 l    df *ABS*	00000000 apiVQ.c
+00022170 l     O .bss	00003c00 raw_buffer.9570
+00022148 l     O .bss	00000004 handle.9569
+0002214c l     O .bss	00000020 in_ptr.9571
+0002216c l     O .bss	00000004 initedFlag.9568
+00000000 l    df *ABS*	00000000 apiVP.c
+00025d70 l     O .bss	00000010 _s16MicData
+00025d80 l     O .bss	00000040 _s32PreXX
+00025dc0 l     O .bss	00000040 _s32PreYY
+00025e00 l     O .bss	00000080 _s64PreXX
+00025e80 l     O .bss	00000080 _s64PreYY
+00025f00 l     O .bss	00000002 _u16Bitwidth
+00025f02 l     O .bss	00000002 _u16Channel
+00025f04 l     O .bss	00000002 _u16GainBitwidth
+00025f06 l     O .bss	00000002 _u16GainMicChn
+00025f08 l     O .bss	00000002 _u16GainProcChn
+00025f0a l     O .bss	00000002 _u16ProcChn
+00025f0c l     O .bss	00000001 _u8AudMicSwGain
+00025f0d l     O .bss	00000001 _u8AudSwGain
+0000ca04 l     O .data	00000002 _s16Coef
+0000ca06 l     O .data	00000002 _u16Stage
+0000ca08 l     O .data	00000008 _u8MicMap
+0000ca10 l     O .data	00000001 _u8VPScale
+0000bd5c l     O .rodata	0000000c _s16GainTable
+00000000 l    df *ABS*	00000000 mosWrapper.c
+00000000 l    df *ABS*	00000000 voc_task.c
+00007050 l     F .text	000000fc prvVdProcTask
+0000720c l     F .text	00000288 prvVocProcTask
+0002e314 l     O .bss	00002400 _ps16VocTaskPcmBuf
+00026b10 l     O .bss	00007802 _ps16VocStreamBuf
+00025f0e l     O .bss	00000001 _eVocVQMode
+00025f10 l     O .bss	00000c00 _ps16VdTaskPcmBuf
+00030714 l     O .bss	00000058 _tVdTaskBuffer
+0003076c l     O .bss	00000004 _tVdTaskEvent
+00030770 l     O .bss	00000200 _tVdTaskStack
+00030970 l     O .bss	00000004 _tVocProcEvent
+00030974 l     O .bss	00000004 _tVocStreamBuffer
+00030978 l     O .bss	00000024 _tVocStreamBufferStruct
+0003099c l     O .bss	00000004 _tVocSyncSem
+000309a0 l     O .bss	00000058 _tVocTaskBuffer
+000309f8 l     O .bss	00000800 _tVocTaskStack
+000311f8 l     O .bss	00000004 err_try_again
+000311fc l     O .bss	00000004 wakeUpNum.9574
+00000000 l    df *ABS*	00000000 mbx_task.c
+00007654 l     F .text	0000024c prvMbxProcTask
+00000000 l    df *ABS*	00000000 main.c
+00031204 l     O .bss	000001e0 uxIdleTaskStack.9008
+000313e4 l     O .bss	000001e0 uxTimerTaskStack.9015
+000315c4 l     O .bss	00000058 xIdleTaskTCB.9007
+0003161c l     O .bss	00000058 xTimerTaskTCB.9014
+0005c6b8 l     O .bin_end	00000004 plateNum
+00000000 l    df *ABS*	00000000 sf_cos.c
+00000000 l    df *ABS*	00000000 w_exp.c
+00000000 l    df *ABS*	00000000 wf_log.c
+00000000 l    df *ABS*	00000000 wf_pow.c
+00000000 l    df *ABS*	00000000 e_exp.c
+0000c1a8 l     O .rodata	00000010 halF
+0000c1b8 l     O .rodata	00000010 ln2HI
+0000c1c8 l     O .rodata	00000010 ln2LO
+00000000 l    df *ABS*	00000000 ef_log.c
+00000000 l    df *ABS*	00000000 ef_pow.c
+00000000 l    df *ABS*	00000000 ef_rem_pio2.c
+0000c1d8 l     O .rodata	00000080 npio2_hw
+0000c258 l     O .rodata	00000318 two_over_pi
+00000000 l    df *ABS*	00000000 ef_sqrt.c
+00000000 l    df *ABS*	00000000 kf_cos.c
+00000000 l    df *ABS*	00000000 kf_rem_pio2.c
+0000c570 l     O .rodata	0000002c PIo2
+0000c59c l     O .rodata	0000000c init_jk
+00000000 l    df *ABS*	00000000 kf_sin.c
+00000000 l    df *ABS*	00000000 s_finite.c
+00000000 l    df *ABS*	00000000 s_matherr.c
+00000000 l    df *ABS*	00000000 s_nan.c
+00000000 l    df *ABS*	00000000 sf_fabs.c
+00000000 l    df *ABS*	00000000 sf_finite.c
+00000000 l    df *ABS*	00000000 sf_floor.c
+00000000 l    df *ABS*	00000000 sf_nan.c
+00000000 l    df *ABS*	00000000 sf_rint.c
+0000c5a8 l     O .rodata	00000008 TWO23
+00000000 l    df *ABS*	00000000 sf_scalbn.c
+00000000 l    df *ABS*	00000000 _arm_addsubdf3.o
+00000000 l    df *ABS*	00000000 _arm_muldivdf3.o
+00000000 l    df *ABS*	00000000 _arm_cmpdf2.o
+00000000 l    df *ABS*	00000000 _arm_fixdfsi.o
+00000000 l    df *ABS*	00000000 _arm_truncdfsf2.o
+00000000 l    df *ABS*	00000000 _arm_addsubsf3.o
+00000000 l    df *ABS*	00000000 _arm_muldivsf3.o
+00000000 l    df *ABS*	00000000 _arm_cmpsf2.o
+00000000 l    df *ABS*	00000000 _arm_unordsf2.o
+00000000 l    df *ABS*	00000000 _arm_fixsfsi.o
+00000000 l    df *ABS*	00000000 errno.c
+00000000 l    df *ABS*	00000000 lock.c
+00000000 l    df *ABS*	00000000 memcpy-stub.c
+00000000 l    df *ABS*	00000000 memmove.c
+00000000 l    df *ABS*	00000000 memset.c
+00000000 l    df *ABS*	00000000 nano-mallocr.c
+00000000 l    df *ABS*	00000000 nano-mallocr.c
+00000000 l    df *ABS*	00000000 puts.c
+00000000 l    df *ABS*	00000000 sbrkr.c
+00000000 l    df *ABS*	00000000 strcpy.c
+00000000 l    df *ABS*	00000000 lib_a-strlen.o
+00000000 l    df *ABS*	00000000 strncmp.c
+00000000 l    df *ABS*	00000000 strncpy.c
+00000000 l    df *ABS*	00000000 wbuf.c
+00000000 l    df *ABS*	00000000 wsetup.c
+00000000 l    df *ABS*	00000000 fflush.c
+00000000 l    df *ABS*	00000000 findfp.c
+0000b14c l     F .text	00000048 std
+00000000 l    df *ABS*	00000000 fwalk.c
+00000000 l    df *ABS*	00000000 makebuf.c
+00000000 l    df *ABS*	00000000 mlock.c
+00000000 l    df *ABS*	00000000 stdio.c
+00000000 l    df *ABS*	00000000 writer.c
+00000000 l    df *ABS*	00000000 closer.c
+00000000 l    df *ABS*	00000000 fstatr.c
+00000000 l    df *ABS*	00000000 isattyr.c
+00000000 l    df *ABS*	00000000 lseekr.c
+00000000 l    df *ABS*	00000000 readr.c
+00000000 l    df *ABS*	00000000 close.c
+00000000 l    df *ABS*	00000000 fstat.c
+00000000 l    df *ABS*	00000000 isatty.c
+00000000 l    df *ABS*	00000000 lseek.c
+00000000 l    df *ABS*	00000000 read.c
+00000000 l    df *ABS*	00000000 write.c
+00000000 l    df *ABS*	00000000 impure.c
+0000ca20 l     O .data	00000060 impure_data
+00000000 l    df *ABS*	00000000 s_lib_ver.c
+00000000 l    df *ABS*	00000000 arm_mult_f32.c
+00000000 l    df *ABS*	00000000 arm_add_f32.c
+00000000 l    df *ABS*	00000000 add.c
+00000000 l    df *ABS*	00000000 cmvn.c
+00000000 l    df *ABS*	00000000 conv.c
+00000000 l    df *ABS*	00000000 fea.c
+000434dc l     F .vq_text_data	00000028 MyMalloc
+0003ae18 l     O .vq_bss	00006400 data.7766
+00043504 l     F .vq_text_data	00000020 VecAllocMem
+00043524 l     F .vq_text_data	0000003e MatAllocMem
+00041218 l     O .vq_bss	00000800 imag.7936
+00041a18 l     O .vq_bss	00000004 index.7767
+00041a1c l     O .vq_bss	00000800 real.7935
+0004221c l     O .vq_bss	00000400 wimag.7904
+0004261c l     O .vq_bss	00000400 wreal.7903
+00000000 l    df *ABS*	00000000 kws.c
+00000000 l    df *ABS*	00000000 kws_impl.c
+00000000 l    df *ABS*	00000000 model.c
+00042a1c l     O .vq_bss	00000190 __nn_nodes.7498
+00042bc0 l     O .vq_bss	00000008 layer16_add_childx.7506
+00042bf4 l     O .vq_bss	00000008 layer22_add_childx.7507
+00042c28 l     O .vq_bss	00000008 layer8_add_childx.7505
+00042c48 l     O .vq_bss	00000064 roots.7499
+00044398 l     O .vq_text_data	0000000c _model.7508
+00000000 l    df *ABS*	00000000 network.c
+0005c02c l     F .vq_text_data	00000014 mcu_op_prelu
+0005c040 l     F .vq_text_data	00000014 mcu_op_conv2d
+0005c054 l     F .vq_text_data	00000028 mcu_op_add
+0005c07c l     F .vq_text_data	00000014 mcu_op_cmvn
+0005c0c8 l     O .vq_text_data	0000001c mcu_op_forward_list
+0005c0e4 l     O .vq_text_data	0000001c mcu_op_otensor_offsetof
+00000000 l    df *ABS*	00000000 prelu.c
+00000000 l    df *ABS*	00000000 tensor.c
+00000000 l    df *ABS*	00000000 tools.c
+00000000 l    df *ABS*	00000000 reent.c
+0004b124 g     O .vq_text_data	00002d00 .hidden cnnx14_weights
+0000b504 g     F .text	00000020 _isatty_r
+00058644 g     O .vq_text_data	00000018 .hidden cnnx4_k_tensor
+0000a3c0 g     F .text	00000012 .hidden __aeabi_dcmple
+0000addc g     F .text	00000010 strcpy
+0000acd0 g     F .text	000000dc _puts_r
+00003f84 g     F .text	0000006c MDrv_MBX_Init
+0000a2fc g     F .text	0000007a .hidden __cmpdf2
+00000278  w    F .text	00000002 NVIC_Handler_087
+00000278  w    F .text	00000002 NVIC_Handler_009
+00000000 g       .isr_vector	0000024c __Vectors
+0000b524 g     F .text	00000024 _lseek_r
+00000278  w    F .text	00000002 DebugMon_Handler
+000019fc g     F .text	000000b0 vTaskPlaceOnUnorderedEventList
+0000477c g     F .text	000000cc MHAL_AUD_DMAReadData
+00000278  w    F .text	00000002 NVIC_Handler_005
+00000278  w    F .text	00000002 NVIC_Handler_040
+000040a0 g     F .text	00000080 MDrv_MBX_RecvMsg
+00000278  w    F .text	00000002 NVIC_Handler_044
+0000a2fc g     F .text	0000007a .hidden __eqdf2
+00005290 g     F .text	00000054 MHal_INTC_FIQUnMask
+00000278  w    F .text	00000002 NVIC_Handler_114
+0000c614 g       .data	00000000 __data_start__
+00000278  w    F .text	00000002 NVIC_Handler_111
+00003550 g     F .text	00000114 print
+00002878 g     F .text	00000028 vPortExitCritical
+00009e6c g     F .text	0000005a .hidden __floatdidf
+00003904 g     F .text	000000c0 MDrv_AUD_SetMicNo
+000444a4 g     O .vq_text_data	00000074 .hidden layer12_cnnx
+00000278  w    F .text	00000002 NVIC_Handler_054
+000431d0 g     F .vq_text_data	00000218 .hidden conv_forward
+00000278  w    F .text	00000002 NVIC_Handler_099
+00003680 g     F .text	0000001c printf
+000318d4 g     O .bss	00000001 __lock___atexit_recursive_mutex
+00000278  w    F .text	00000002 NVIC_Handler_017
+000042ac g     F .text	0000003c MDrv_PM_Resume
+0005c100 g     F .vq_text_data	000000a4 .hidden prelu_forward
+0000b46e g     F .text	00000024 __sseek
+0000b1fc g     F .text	00000070 __sinit
+0000ae48 g     F .text	000000a4 __swbuf_r
+0000421c g     F .text	0000002c MDrv_INTC_IRQSetMask
+00000278  w    F .text	00000002 HardFault_Handler
+00000fe4 g     F .text	00000050 vQueueWaitForMessageRestricted
+00000278  w    F .text	00000002 NVIC_Handler_038
+0000b1a0 g     F .text	0000002c __sfmoreglue
+00001d64 g     F .text	00000038 eTaskConfirmSleepModeStatus
+00003018 g     F .text	00000116 xStreamBufferReceive
+0000b408 g     F .text	0000000c __malloc_unlock
+00006114  w    F .text	00000048 MApi_VOC_VPPort
+0000a870 g     F .text	00000136 .hidden __divsf3
+00007044 g     F .text	0000000c MOS_mDelay
+00000278  w    F .text	00000002 NVIC_Handler_029
+00000278  w    F .text	00000002 NVIC_Handler_079
+00002904 g     F .text	0000002c SysTick_Handler
+0005c24c g     F .vq_text_data	00000030 .hidden safe_malloc
+000318d5 g     O .bss	00000001 __lock___arc4random_mutex
+00000278  w    F .text	00000002 NVIC_Handler_030
+00000000 g       .isr_vector	00000000 _isr_vector
+00000278  w    F .text	00000002 NVIC_Handler_057
+0000ab3a g     F .text	00000034 memmove
+0000c614 g       *ABS*	00000000 _sidata
+000028a0 g     F .text	00000064 PendSV_Handler
+00000278  w    F .text	00000002 NVIC_Handler_092
+00007c88 g     F .text	00000310 powf
+00000278  w    F .text	00000002 NVIC_Handler_010
+00000ac0 g     F .text	000000de xQueueGenericSendFromISR
+00000278  w    F .text	00000002 NMI_Handler
+0000c614 g       .rodata	00000000 __exidx_end
+0000aac0 g     F .text	0000004c .hidden __fixsfsi
+0000466c g     F .text	00000040 MHAL_AUD_DMAReset
+0000515c g     F .text	00000048 MHal_INTC_FIQClear
+000443a4 g     O .vq_text_data	00000074 .hidden layer0_cnnx
+0000a2ec g     F .text	0000008a .hidden __gtdf2
+0000ab0c g     F .text	0000000c __errno
+0000c614 g       .data	00000000 __etext
+00002e14 g     F .text	000000a8 xStreamBufferReset
+0005c22e g     F .vq_text_data	0000001e .hidden tensor_clear
+000573b4 g     O .vq_text_data	00000018 .hidden cnnx2_k_tensor
+00004adc g     F .text	0000000c uart_clear_lsr
+00000278  w    F .text	00000002 NVIC_Handler_080
+000050b4 g     F .text	00000054 MHal_INTC_IRQStatus
+00008c6c g     F .text	000002e8 __ieee754_rem_pio2f
+0000ca80 g     O .bss	00000004 pxCurrentTCB
+00005008 g     F .text	00000048 MHAL_MBX_RecvEndExt
+0000627c g     F .text	0000073c HPF_16
+00000278  w    F .text	00000002 NVIC_Handler_104
+00000278  w    F .text	00000002 NVIC_Handler_108
+00007b90 g     F .text	000000f8 logf
+00000278  w    F .text	00000002 NVIC_Handler_101
+000051a4 g     F .text	0000004c MHal_INTC_IRQMask
+0000b4e0 g     F .text	00000024 _fstat_r
+00044418 g     O .vq_text_data	00000074 .hidden layer10_cnnx
+000318e0 g     O .bss	00000004 errno
+0000c614 g       .data	00000000 _etext
+0000ca80 g       .bss	00000000 _sbss
+0004de9c g     O .vq_text_data	00000018 .hidden cnnx18_k_tensor
+0000a388 g     F .text	00000010 .hidden __aeabi_cdcmple
+00000278  w    F .text	00000002 NVIC_Handler_023
+00043db8 g     F .vq_text_data	00000004 kws_create
+000032b0 g     F .text	00000008 FreeRTOS_CLIGetOutputBuffer
+0003a500 g       *ABS*	00000000 __Main_Stack_Limit
+0000a4f8 g     F .text	00000160 .hidden __aeabi_fadd
+00004204 g     F .text	0000000c MDrv_INTC_IRQAttach
+0000a4f4 g     F .text	00000164 .hidden __subsf3
+00004ac0 g     F .text	00000010 uart_int_source
+00004cf8 g     F .text	000001d8 MHAL_MBX_Fire
+00000278  w    F .text	00000002 NVIC_Handler_066
+00001cb0 g     F .text	00000018 vTaskInternalSetTimeOutState
+00042cac g     F .vq_text_data	00000034 .hidden add_forward
+000048a0 g     F .text	0000001c MHAL_AUD_DMAClearInt
+0005c1e2 g     F .vq_text_data	00000026 .hidden tensor_new_wo_malloc
+00000298 g     F .text	00000118 xEventGroupWaitBits
+0000714c g     F .text	00000028 VocTaskVQConfig
+000078a0 g     F .text	00000034 MbxTaskStart
+000041ac g     F .text	00000058 MDrv_INTC_Init
+00042d3c g     F .vq_text_data	000001a4 .hidden conv_forward_naive
+0004de24 g     O .vq_text_data	00000018 .hidden cnnx18_b_tensor
+00000000         *UND*	00000000 test123
+00004848 g     F .text	0000002c MHAL_AUD_DMAStart
+00002a94 g     F .text	0000013c xPortStartScheduler
+0000ab1e g     F .text	0000001c memcpy
+00001974 g     F .text	00000088 vTaskPlaceOnEventList
+00001bf0 g     F .text	00000088 vTaskRemoveFromUnorderedEventList
+0000a378 g     F .text	00000020 .hidden __aeabi_cdrcmple
+00000278  w    F .text	00000002 NVIC_Handler_026
+00055d7c g     O .vq_text_data	000015c0 .hidden cnnx24_weights
+0000aa80 g     F .text	00000012 .hidden __aeabi_fcmpgt
+0000b194 g     F .text	0000000c _cleanup_r
+00009df4 g     F .text	00000022 .hidden __floatsidf
+00002a4c  w    F .text	00000048 vPortSetupTimerInterrupt
+0000a2f4 g     F .text	00000082 .hidden __ltdf2
+00000278  w    F .text	00000002 NVIC_Handler_072
+000448ec g     O .vq_text_data	00000018 .hidden layer7_prelu
+00004120 g     F .text	00000010 MDrv_MBX_RecvMsgEndExt
+0005c090 g     F .vq_text_data	00000038 .hidden mcu_network_forward
+00000278  w    F .text	00000002 NVIC_Handler_069
+0005c2b8 g       .noinit	00000000 _noinit
+0000adac g     F .text	00000010 puts
+0003ad00 g       .msp	00000000 __SRAM_segment_end__
+00005088 g     F .text	0000002a MHal_Timer_Delay
+00004424 g     F .text	000000fc MHAL_AUD_I2SSetChn
+00042bac g     O .vq_bss	00000014 .hidden layer16_add
+0000830c g     F .text	00000258 __ieee754_logf
+000026b8 g     F .text	000000b0 vPortFree
+00000278  w    F .text	00000002 NVIC_Handler_117
+00000de4 g     F .text	000001b4 xQueueSemaphoreTake
+00000278  w    F .text	00000002 NVIC_Handler_095
+00002bd0 g     F .text	0000005c vPortValidateInterruptPriority
+0000b57c g     F .text	00000010 _fstat
+00000278  w    F .text	00000002 NVIC_Handler_050
+0000a660 g     F .text	0000001c .hidden __aeabi_i2f
+00000278  w    F .text	00000002 NVIC_Handler_013
+00000278  w    F .text	00000002 UsageFault_Handler
+0000a9b0 g     F .text	00000066 .hidden __lesf2
+000004a8 g     F .text	0000001e vListInsertEnd
+00004210 g     F .text	0000000c MDrv_INTC_FIQAttach
+0003ae18 g       .dsp_text_data	00000000 __vp_end__
+00005ea0 g     F .text	00000064 MApi_VOC_VDReset
+000045a8 g     F .text	00000098 MHAL_AUD_I2SEnable
+0000ca80 g       .bss	00000000 __bss_start__
+0000027c g     F .text	0000001c xEventGroupCreate
+00009dd4 g     F .text	0000001e .hidden __aeabi_ui2d
+0000ca14 g     O .data	00000004 gu32MosDbgLevel
+000039c4 g     F .text	00000134 MDrv_AUD_Init
+0000c614 g       .data	00000000 _sdata
+00000278  w    F .text	00000002 NVIC_Handler_098
+00009b50 g     F .text	00000000 .hidden __aeabi_drsub
+00000278  w    F .text	00000002 NVIC_Handler_053
+00000278  w    F .text	00000002 NVIC_Handler_033
+0000996c g     F .text	00000010 finitef
+0000adbc g     F .text	00000020 _sbrk_r
+00042c30 g     O .vq_bss	00000018 .hidden layer9_relu
+000051f0 g     F .text	00000054 MHal_INTC_IRQUnMask
+00000278  w    F .text	00000002 NVIC_Handler_016
+00000278  w    F .text	00000002 NVIC_Handler_074
+00009964 g     F .text	00000006 fabsf
+0000b548 g     F .text	00000024 _read_r
+000004a0 g     F .text	00000006 vListInitialiseItem
+00005f04 g     F .text	000000ec MApi_VOC_VDPort
+000074b8 g     F .text	0000009c VocTaskEnableFunc
+0000a3ac g     F .text	00000012 .hidden __aeabi_dcmplt
+00000c60 g     F .text	00000184 xQueueReceive
+00007554 g     F .text	00000100 VocTaskStart
+00000278  w    F .text	00000002 NVIC_Handler_124
+00000278  w    F .text	00000002 NVIC_Handler_127
+00044974 g     O .vq_text_data	00001e00 .hidden cnnx0_weights
+0005bd4c g     O .vq_text_data	00000060 .hidden prelu13_weights
+00009e18 g     F .text	00000042 .hidden __extendsfdf2
+0000a11c g     F .text	000001d0 .hidden __aeabi_ddiv
+000079fc g     F .text	0000001c vApplicationGetTimerTaskMemory
+000467ec g     O .vq_text_data	00000018 .hidden cnnx10_k_tensor
+00009b5c g     F .text	00000276 .hidden __adddf3
+0000a9b8 g     F .text	0000005e .hidden __nesf2
+00000278  w    F .text	00000002 NVIC_Handler_088
+00055d64 g     O .vq_text_data	00000018 .hidden cnnx24_k_tensor
+0005c6b8 g       .heap	00000000 _heap_end
+00021534 g     O .bss	00000001 gbDmaWrEnable
+0000c614 g       .rodata	00000000 __exidx_start
+000318d6 g     O .bss	00000001 __lock___env_recursive_mutex
+00009ec8 g     F .text	00000254 .hidden __aeabi_dmul
+00004ab4 g     F .text	0000000c uart_int_enable
+0000b58c g     F .text	00000010 _isatty
+0000ca18 g     O .data	00000001 __fdlib_version
+00000278  w    F .text	00000002 NVIC_Handler_082
+00000278  w    F .text	00000002 NVIC_Handler_006
+00000278  w    F .text	00000002 NVIC_Handler_041
+00000278  w    F .text	00000002 NVIC_Handler_045
+000318d7 g     O .bss	00000001 __lock___sinit_recursive_mutex
+0000c5b0 g     O .rodata	00000004 _global_impure_ptr
+000003f8 g     F .text	00000090 xEventGroupSetBits
+0000985c g     F .text	000000ec __kernel_sinf
+00043f08 g     F .vq_text_data	000000b0 .hidden kws_impl_score
+00007f98 g     F .text	00000374 __ieee754_exp
+00005ff0 g     F .text	00000068 MApi_VOC_VDNotify
+00000800 g       *ABS*	00000000 __Main_Stack_Size
+00004ed0 g     F .text	00000054 MHAL_MBX_GetFireStatus
+0005a1d4 g     O .vq_text_data	00000018 .hidden cnnx6_k_tensor
+00005060 g     F .text	00000014 MHal_Timer_GetTick
+00042c14 g     O .vq_bss	00000014 .hidden layer8_add
+000043e4 g     F .text	00000040 MHAL_AUD_I2SSetMsMode
+00003af8 g     F .text	00000060 MDrv_AUD_GetMicNo
+00009dd4 g     F .text	0000001e .hidden __floatunsidf
+00003190 g     F .text	0000002c _sbrk
+00002558 g     F .text	00000160 pvPortMalloc
+00003cd4 g     F .text	00000014 MDrv_AUD_IsXrun
+0004491c g     O .vq_text_data	00000040 .hidden cnnx0_biases
+00044878 g     O .vq_text_data	00000074 .hidden layer6_cnnx
+00004894 g     F .text	0000000c MHAL_AUD_DMAIsRunning
+00000278  w    F .text	00000002 NVIC_Handler_085
+00004640 g     F .text	0000002c MHAL_AUD_I2SInit
+0004deb4 g     O .vq_text_data	00003f00 .hidden cnnx18_weights
+00000488 g     F .text	00000016 vListInitialise
+00003130 g     F .text	00000022 xStreamBufferIsEmpty
+0004b094 g     O .vq_text_data	00000018 .hidden cnnx14_b_tensor
+00000278  w    F .text	00000002 NVIC_Handler_003
+00055d44 g     O .vq_text_data	00000018 .hidden cnnx24_b_tensor
+00000278  w    F .text	00000002 NVIC_Handler_048
+00004520 g     F .text	00000088 MHAL_AUD_I2SSetSynthRate
+00007a18 g     F .text	00000078 cosf
+0000a44c g     F .text	0000009e .hidden __aeabi_d2f
+00003eb0 g     F .text	0000000c MDrv_AUD_AECIsEnable
+00000278  w    F .text	00000002 NVIC_Handler_061
+00001474 g     F .text	0000000c xTaskGetTickCount
+000008bc g     F .text	00000190 xQueueGenericSend
+00051db4 g     O .vq_text_data	00000018 .hidden cnnx20_b_tensor
+0000a4f4 g     F .text	00000164 .hidden __aeabi_fsub
+00000278  w    F .text	00000002 NVIC_Handler_090
+0000544c g     F .text	00000014 MHal_BDMA_Init
+00000278  w    F .text	00000002 NVIC_Handler_112
+00002ebc g     F .text	0000015a xStreamBufferSend
+000318e4 g       .bss	00000000 _ebss
+00000250 g     F .text	00000028 Reset_Handler
+0000aa94 g     F .text	0000002c .hidden __aeabi_fcmpun
+000069b8 g     F .text	00000224 HPF_32
+00000278  w    F .text	00000002 NVIC_Handler_093
+00000278  w    F .text	00000002 NVIC_Handler_011
+0000aa6c g     F .text	00000012 .hidden __aeabi_fcmpge
+0000a3fc g     F .text	0000004e .hidden __fixdfsi
+00001e4c g     F .text	00000088 xTaskPriorityDisinherit
+0005c2b8 g       .heap	00000000 _heap_start
+000318d8 g     O .bss	00000001 __lock___malloc_recursive_mutex
+00009000 g     F .text	00000188 __kernel_cosf
+00000278  w    F .text	00000002 NVIC_Handler_036
+0000a68c g     F .text	0000007c .hidden __floatdisf
+00005df0 g     F .text	00000054 MApi_VOC_VDConfig
+0000615c g     F .text	0000000c Mapi_VOC_VPConfig
+000052e4 g     F .text	0000002c MHal_CPUINT_Fire
+00048304 g     O .vq_text_data	00000018 .hidden cnnx12_b_tensor
+00000278  w    F .text	00000002 NVIC_Handler_077
+0000a9a8 g     F .text	0000006e .hidden __gtsf2
+0000797c g     F .text	00000012 vApplicationMallocFailedHook
+00001b40 g     F .text	000000b0 xTaskRemoveFromEventList
+00009b5c g     F .text	00000276 .hidden __aeabi_dadd
+000003b0 g     F .text	00000046 xEventGroupClearBits
+0000a2f4 g     F .text	00000082 .hidden __ledf2
+00000278  w    F .text	00000002 NVIC_Handler_055
+0000aa58 g     F .text	00000012 .hidden __aeabi_fcmple
+000037c4 g     F .text	0000001c vSerialPutString
+0005a174 g     O .vq_text_data	00000060 .hidden cnnx6_biases
+00009e5c g     F .text	0000006a .hidden __aeabi_ul2d
+000037e0 g     F .text	0000000c xSerialPutChar
+00000278  w    F .text	00000002 NVIC_Handler_018
+00006f48 g     F .text	00000070 MOS_IRQn_AttachIsr
+000446d4 g     O .vq_text_data	00000018 .hidden layer21_prelu
+0000c5b4 g     O .rodata	00000020 __sf_fake_stderr
+00042bfc g     O .vq_bss	00000018 .hidden layer23_relu
+00000278  w    F .text	00000002 NVIC_Handler_039
+00003664 g     F .text	0000001c UartSendTrace
+0005be0c g     O .vq_text_data	00000060 .hidden prelu19_weights
+00043564 g     F .vq_text_data	000007f8 .hidden ZFea_ExtractFBank
+0000ab1c g     F .text	00000002 __retarget_lock_release_recursive
+00003bb8 g     F .text	00000044 MDrv_AUD_SigGenEnable
+00004168 g     F .text	00000044 NVIC_Handler_NOPMFIQ
+0000ca80 g       .data	00000000 __data_end__
+00005dc8 g     F .text	00000028 MApi_VOC_VDInit
+00003ebc g     F .text	0000006c MDrv_BDMA_Copy
+00002d40 g     F .text	000000d2 xStreamBufferGenericCreateStatic
+00000278  w    F .text	00000002 NVIC_Handler_105
+00001f8c g     F .text	00000018 pvTaskIncrementMutexHeldCount
+00000278  w    F .text	00000002 NVIC_Handler_109
+00000278  w    F .text	00000002 NVIC_Handler_102
+00000278  w    F .text	00000002 NVIC_Handler_031
+0000a3e8 g     F .text	00000012 .hidden __aeabi_dcmpgt
+00006cf8 g     F .text	00000034 MApi_VOC_SwGainReset
+00004a0c g     F .text	000000a8 uart_init
+00004700 g     F .text	00000030 MHAL_AUD_DMAGetBufLevel
+0000b1cc g     F .text	0000000c __sfp_lock_acquire
+00001cc8 g     F .text	00000090 xTaskCheckForTimeOut
+000318e4 g       .bss	00000000 __bss_end__
+00003c6c g     F .text	00000068 MDrv_AUD_Stop
+0000ab80 g     F .text	0000009c _free_r
+00055d5c g     O .vq_text_data	00000008 .hidden cnnx24_biases
+0005bdac g     O .vq_text_data	00000060 .hidden prelu15_weights
+00001dc8 g     F .text	00000084 xTaskPriorityInherit
+00044530 g     O .vq_text_data	00000074 .hidden layer14_cnnx
+00000278  w    F .text	00000002 NVIC_Handler_027
+00000278  w    F .text	00000002 NVIC_Handler_021
+0000a3d4 g     F .text	00000012 .hidden __aeabi_dcmpge
+00003ce8 g     F .text	00000140 MDrv_AUD_ReadPCM
+00005488 g     F .text	00000002 MHal_CPU_Init
+000585cc g     O .vq_text_data	00000018 .hidden cnnx4_b_tensor
+00009b58 g     F .text	0000027a .hidden __aeabi_dsub
+00000278  w    F .text	00000002 NVIC_Handler_064
+00000278  w    F .text	00000002 Default_Handler
+00000250 g     F .text	00000000 _start
+00001464 g     F .text	00000010 vTaskSuspendAll
+00003154 g     F .text	0000003c xStreamBufferIsFull
+00046774 g     O .vq_text_data	00000018 .hidden cnnx10_b_tensor
+000031e8 g     F .text	000000c8 FreeRTOS_CLIProcessCommand
+00009e5c g     F .text	0000006a .hidden __floatundidf
+0000b59c g     F .text	00000010 _lseek
+000446ec g     O .vq_text_data	00000074 .hidden layer24_cnnx
+0000a660 g     F .text	0000001c .hidden __floatsisf
+000004fc g     F .text	00000026 uxListRemove
+00004b18 g     F .text	000000e0 MHAL_MBX_Init
+00000400 g       *ABS*	00000000 _Minimum_Stack_Size
+00057354 g     O .vq_text_data	00000060 .hidden cnnx2_biases
+00007174 g     F .text	00000098 VocTaskVQPost
+00043098 g     F .vq_text_data	00000138 .hidden conv_forward_im2col
+0000adfc g     F .text	00000024 strncmp
+00042ee0 g     F .vq_text_data	000001b8 .hidden im2col
+00000278  w    F .text	00000002 NVIC_Handler_024
+00044648 g     O .vq_text_data	00000018 .hidden layer1_prelu
+00001154 g     F .text	00000104 xTaskCreateStatic
+0005c2b8 g       .noinit	00000000 _end_noinit
+00000278  w    F .text	00000002 NVIC_Handler_071
+0000aac0 g     F .text	0000004c .hidden __aeabi_f2iz
+0000ae20 g     F .text	00000026 strncpy
+00002184 g     F .text	00000030 xTaskNotifyStateClear
+00000278  w    F .text	00000002 NVIC_Handler_067
+0000a9b8 g     F .text	0000005e .hidden __eqsf2
+0000188c g     F .text	000000e8 vTaskSwitchContext
+00006168 g     F .text	00000038 MApi_VOC_MicMapConfig
+0003ad00 g     F .dsp_text_data	0000008c arm_mult_f32
+000033d0 g     F .text	00000048 vUARTCommandConsoleStart
+00004338 g     F .text	000000ac MHAL_AUD_I2SSetBitWidth
+00004748 g     F .text	00000034 MHAL_AUD_DMAEnableInt
+00000278  w    F .text	00000002 NVIC_Handler_115
+0000548c g     F .text	00000028 MHal_CPU_SetFreq
+00000278  w    F .text	00000002 NVIC_Handler_118
+00005d14 g     F .text	000000b4 MApi_VOC_SrcInit48k
+00044630 g     O .vq_text_data	00000018 .hidden layer19_prelu
+00005244 g     F .text	0000004c MHal_INTC_FIQMask
+0004b0ac g     O .vq_text_data	00000060 .hidden cnnx14_biases
+00000278  w    F .text	00000002 NVIC_Handler_034
+0000073c g     F .text	000000e2 xQueueGenericCreateStatic
+00000278  w    F .text	00000002 NVIC_Handler_058
+00001aac g     F .text	00000094 vTaskPlaceOnEventListRestricted
+0000a870 g     F .text	00000136 .hidden __aeabi_fdiv
+0000b4c0 g     F .text	00000020 _close_r
+00009df4 g     F .text	00000022 .hidden __aeabi_i2d
+00000278  w    F .text	00000002 NVIC_Handler_075
+00001480 g     F .text	00000030 vTaskStepTick
+00004ae8 g     F .text	00000018 uart_read_byte
+00001fa4 g     F .text	000000e8 xTaskNotifyWait
+00006d3c g     F .text	0000020c MApi_VOC_SwGain
+00000278  w    F .text	00000002 NVIC_Handler_110
+00006058 g     F .text	00000026 MApi_VOC_NotifyStatus
+000079e0 g     F .text	0000001c vApplicationGetIdleTaskMemory
+0005c208 g     F .vq_text_data	00000026 .hidden tensor_delete
+0000a67c g     F .text	0000008c .hidden __floatundisf
+000053dc g     F .text	00000070 MHal_BDMA_IMItoIMI
+0000aeec g     F .text	000000dc __swsetup_r
+00007990 g     F .text	00000012 vApplicationStackOverflowHook
+0000a11c g     F .text	000001d0 .hidden __divdf3
+0000b26c g     F .text	0000008c __sfp
+00003890 g     F .text	00000074 MDrv_AUD_SetBitWidth
+000048dc g     F .text	00000024 MHAL_AUD_DMASetChn
+0003ae18 g       .dsp_text_data	00000000 __vp_start__
+0000a658 g     F .text	00000024 .hidden __aeabi_ui2f
+0000b1f0 g     F .text	0000000c __sinit_lock_release
+00009ec8 g     F .text	00000254 .hidden __muldf3
+00008564 g     F .text	00000708 __ieee754_powf
+0000b414 g     F .text	00000022 __sread
+00000278  w    F .text	00000002 NVIC_Handler_096
+00006d2c g     F .text	00000010 MApi_VOC_SetSwGain
+00004274 g     F .text	00000038 MDrv_PM_Suspend
+00046804 g     O .vq_text_data	00001b00 .hidden cnnx10_weights
+000037ec g     F .text	000000a4 NVIC_Handler_AUDIO
+0000b3fc g     F .text	0000000c __malloc_lock
+0000534c g     F .text	00000048 MHal_BDMA_IMItoMIU
+0005733c g     O .vq_text_data	00000018 .hidden cnnx2_b_tensor
+00000278  w    F .text	00000002 NVIC_Handler_051
+00009aa8 g     F .text	000000a8 scalbnf
+00000278  w    F .text	00000002 NVIC_Handler_014
+00000278  w    F .text	00000002 NVIC_Handler_063
+0000b0d4 g     F .text	00000078 _fflush_r
+0005bf0c g     O .vq_text_data	00000060 .hidden prelu3_weights
+00042ce0 g     F .vq_text_data	0000005c .hidden cmvn_forward
+0000c5d4 g     O .rodata	00000020 __sf_fake_stdin
+0000a9b8 g     F .text	0000005e .hidden __cmpsf2
+0000208c g     F .text	000000f8 xTaskGenericNotify
+0000ab1a g     F .text	00000002 __retarget_lock_acquire_recursive
+00003e6c g     F .text	00000044 MDrv_AUD_AECEnable
+00043e3c g     F .vq_text_data	000000cc .hidden kws_impl_create
+0005bf6c g     O .vq_text_data	00000060 .hidden prelu5_weights
+00004a08 g     F .text	00000004 uart_id
+00000278  w    F .text	00000002 NVIC_Handler_125
+0000ab6e g     F .text	00000010 memset
+00008f54 g     F .text	000000aa __ieee754_sqrtf
+00000278  w    F .text	00000002 NVIC_Handler_128
+00000278  w    F .text	00000002 NVIC_Handler_122
+00000278  w    F .text	00000002 MemManage_Handler
+00000000 g       .isr_vector	00000000 __isr_vector
+00000278  w    F .text	00000002 NVIC_Handler_119
+000078d4 g     F .text	000000a8 main
+000445bc g     O .vq_text_data	00000074 .hidden layer18_cnnx
+00003e28 g     F .text	00000044 MDrv_AUD_I2SEnable
+0005bfcc g     O .vq_text_data	00000060 .hidden prelu7_weights
+00000278  w    F .text	00000002 NVIC_Handler_086
+0000ab18 g     F .text	00000002 __retarget_lock_init_recursive
+0000a68c g     F .text	0000007c .hidden __aeabi_l2f
+0000a9b0 g     F .text	00000066 .hidden __ltsf2
+000004c8 g     F .text	00000032 vListInsert
+00000278  w    F .text	00000002 NVIC_Handler_WDT
+00000278  w    F .text	00000002 NVIC_Handler_004
+00000278  w    F .text	00000002 NVIC_Handler_049
+00031200 g     O .bss	00000004 plateCheck
+00000278  w    F .text	00000002 NVIC_Handler_008
+00044904 g     O .vq_text_data	00000018 .hidden cnnx0_b_tensor
+00000278  w    F .text	00000002 NVIC_Handler_043
+00002810 g     F .text	00000024 SVC_Handler
+0000b492 g     F .text	00000008 __sclose
+00009954 g     F .text	00000004 matherr
+00000278  w    F .text	00000002 NVIC_Handler_120
+000024a8 g     F .text	000000b0 xTimerCreateTimerTask
+0000a44c g     F .text	0000009e .hidden __truncdfsf2
+0000ac1c g     F .text	000000b4 _malloc_r
+00004730 g     F .text	00000018 MHAL_AUD_DMAGetIntStatus
+00009e6c g     F .text	0000005a .hidden __aeabi_l2d
+0004837c g     O .vq_text_data	00000018 .hidden cnnx12_k_tensor
+0005a1ec g     O .vq_text_data	00001b00 .hidden cnnx6_weights
+0000a67c g     F .text	0000008c .hidden __aeabi_ul2f
+00007a90 g     F .text	00000100 exp
+00001d9c g     F .text	0000000c xTaskGetCurrentTaskHandle
+0000aa20 g     F .text	00000010 .hidden __aeabi_cfcmple
+00000820 g     F .text	0000009a xQueueGenericCreate
+00003b58 g     F .text	00000060 MDrv_AUD_GetBitWidth
+00000278  w    F .text	00000002 NVIC_Handler_089
+00000278  w    F .text	00000002 NVIC_Handler_083
+0000a708 g     F .text	00000168 .hidden __mulsf3
+00009948 g     F .text	0000000c finite
+00000278  w    F .text	00000002 NVIC_Handler_007
+00000278  w    F .text	00000002 NVIC_Handler_001
+00000278  w    F .text	00000002 NVIC_Handler_046
+00000278  w    F .text	00000002 NVIC_Handler_042
+00044660 g     O .vq_text_data	00000074 .hidden layer20_cnnx
+00000278  w    F .text	00000002 NVIC_Handler_113
+0004448c g     O .vq_text_data	00000018 .hidden layer11_prelu
+0000a2fc g     F .text	0000007a .hidden __nedf2
+0004de3c g     O .vq_text_data	00000060 .hidden cnnx18_biases
+00005c20 g     F .text	000000f4 MApi_VOC_SrcProcess48k
+00000278  w    F .text	00000002 NVIC_Handler_060
+00006c84 g     F .text	00000034 MApi_VOC_HpfConfig
+00000278  w    F .text	00000002 NVIC_Handler_056
+00000278  w    F .text	00000002 NVIC_Handler_130
+0000171c g     F .text	00000020 xTaskResumeAll
+0000134c g     F .text	00000118 vTaskStartScheduler
+00000278  w    F .text	00000002 NVIC_Handler_019
+00000278  w    F .text	00000002 NVIC_Handler_091
+0004b10c g     O .vq_text_data	00000018 .hidden cnnx14_k_tensor
+0000a9a8 g     F .text	0000006e .hidden __gesf2
+0000b49c g     F .text	00000024 _write_r
+0000369c g     F .text	00000098 NVIC_Handler_UART
+00000fc0 g     F .text	00000022 xQueueIsQueueFullFromISR
+00004bf8 g     F .text	00000100 MHAL_MBX_ClearAll
+00002930  w    F .text	0000011c vPortSuppressTicksAndSleep
+0000a4ec g     F .text	0000016c .hidden __aeabi_frsub
+0005865c g     O .vq_text_data	00001b00 .hidden cnnx4_weights
+000099f8 g     F .text	00000008 nanf
+00004f24 g     F .text	000000e4 MHAL_MBX_Recv
+00005338 g     F .text	00000014 MHal_BDMA_PollingDone
+0000ca1c g     O .data	00000004 _impure_ptr
+00004130 g     F .text	00000038 NVIC_Handler_NOPMIRQ
+0000aa30 g     F .text	00000012 .hidden __aeabi_fcmpeq
+0000afc8 g     F .text	0000010c __sflush_r
+000037ac g     F .text	00000018 xSerialGetChar
+00006c40 g     F .text	00000044 MApi_VOC_Hpf
+0000a708 g     F .text	00000168 .hidden __aeabi_fmul
+00043fb8 g     F .vq_text_data	000000ec .hidden kws_impl_status
+0000aa18 g     F .text	00000018 .hidden __aeabi_cfrcmple
+000445a4 g     O .vq_text_data	00000018 .hidden layer15_prelu
+00006cb8 g     F .text	00000030 MApi_VOC_HpfEnable
+00005460 g     F .text	00000002 MHal_BDMA_Resume
+00000278  w    F .text	00000002 NVIC_Handler_094
+00000278  w    F .text	00000002 NVIC_Handler_012
+000447ec g     O .vq_text_data	00000074 .hidden layer4_cnnx
+00004944 g     F .text	00000028 MHAL_AUD_DMicSelPhase
+00005108 g     F .text	00000054 MHal_INTC_FIQStatus
+00001d58 g     F .text	0000000c vTaskMissedYield
+00000278  w    F .text	00000002 NVIC_Handler_037
+00000278  w    F .text	00000002 DEF_IRQHandler
+00005394 g     F .text	00000048 MHal_BDMA_MIUtoIMI
+00000f98 g     F .text	00000026 uxQueueMessagesWaiting
+00000278  w    F .text	00000002 NVIC_Handler_081
+00000278  w    F .text	00000002 NVIC_Handler_078
+00044860 g     O .vq_text_data	00000018 .hidden layer5_prelu
+00009958 g     F .text	0000000c nan
+000014b0 g     F .text	0000014c xTaskIncrementTick
+00000278  w    F .text	00000002 NVIC_Handler_106
+00000278  w    F .text	00000002 NVIC_Handler_107
+000061a0 g     F .text	000000dc MApi_VOC_MicMap
+0000aa44 g     F .text	00000012 .hidden __aeabi_fcmplt
+00000278  w    F .text	00000002 NVIC_Handler_103
+00005e44 g     F .text	0000005c MApi_VOC_VDConfigExt
+00000278  w    F .text	00000002 NVIC_Handler_100
+00005050 g     F .text	00000010 MHal_Timer_Reset
+0000b334 g     F .text	00000048 __swhatbuf_r
+0003ad00 g       .msp	00000000 _estack
+00006ce8 g     F .text	00000010 MApi_VOC_SetMicSwGain
+0003ad00 g       .msp	00000000 __stack
+0004831c g     O .vq_text_data	00000060 .hidden cnnx12_biases
+00043dc0 g     F .vq_text_data	0000007c .hidden softmax
+0000a398 g     F .text	00000012 .hidden __aeabi_dcmpeq
+0003167c g     O .bss	00000200 _xMbxTaskStack
+00006bdc g     F .text	00000064 MApi_VOC_HpfReset
+00006fb8 g     F .text	0000004c MOS_IRQn_Mask
+00042be0 g     O .vq_bss	00000014 .hidden layer22_add
+00000278  w    F .text	00000002 NVIC_Handler_025
+0000b5bc g     F .text	00000010 _write
+0000ca80 g       .data	00000000 _edata
+00006080  w    F .text	00000094 MApi_VOC_VQPort
+0000aa94 g     F .text	0000002c .hidden __unordsf2
+00000278  w    F .text	00000002 NVIC_Handler_068
+000042e8 g     F .text	0000002c MDrv_CPU_SetFreq
+00044518 g     O .vq_text_data	00000018 .hidden layer13_prelu
+00003ff0 g     F .text	000000b0 MDrv_MBX_SendMsg
+000046ac g     F .text	00000040 MHAL_AUD_DMASetBufAddr
+000318d9 g     O .bss	00000001 __lock___at_quick_exit_mutex
+00003f28 g     F .text	0000005c NVIC_Handler_MBX
+00001258 g     F .text	000000f2 xTaskCreate
+000046ec g     F .text	00000014 MHAL_AUD_DMASetBufOverThr
+00004874 g     F .text	00000020 MHAL_AUD_DMAStop
+0000b436 g     F .text	00000038 __swrite
+00004314 g     F .text	00000024 MHAL_AUD_I2SSetFmt
+00007004 g     F .text	00000040 MOS_IRQn_Unmask
+00000278  w    F .text	00000002 NVIC_Handler_028
+00000278  w    F .text	00000002 NVIC_Handler_022
+0000b2f8 g     F .text	0000003c _fwalk_reent
+0000a658 g     F .text	00000024 .hidden __floatunsisf
+0000a3fc g     F .text	0000004e .hidden __aeabi_d2iz
+0005c27c g     F .vq_text_data	00000012 .hidden safe_free
+0000aa20 g     F .text	00000010 .hidden __aeabi_cfcmpeq
+00000278  w    F .text	00000002 NVIC_Handler_065
+0000b1d8 g     F .text	0000000c __sfp_lock_release
+0005beac g     O .vq_text_data	00000060 .hidden prelu21_weights
+00005310 g     F .text	00000028 MHal_CPUINT_Clear
+00005468 g     F .text	00000020 Mhal_PM_Resume
+0000c5f4 g     O .rodata	00000020 __sf_fake_stdout
+00000278  w    F .text	00000002 NVIC_Handler_116
+00000278  w    F .text	00000002 NVIC_Handler_020
+00051dcc g     O .vq_text_data	00000060 .hidden cnnx20_biases
+00001da8 g     F .text	00000020 xTaskGetSchedulerState
+0005c1a4 g     F .vq_text_data	0000003e .hidden tensor_new
+0005a15c g     O .vq_text_data	00000018 .hidden cnnx6_b_tensor
+00001ed4 g     F .text	000000a0 vTaskPriorityDisinheritAfterTimeout
+0000496c g     F .text	0000009c MHAL_AUD_Init
+0000b5ac g     F .text	00000010 _read
+000048bc g     F .text	00000020 MHAL_AUD_DMASetWidth
+00000278  w    F .text	00000002 NVIC_Handler_097
+00000278  w    F .text	00000002 NVIC_Handler_052
+00000278  w    F .text	00000002 NVIC_Handler_032
+000447d4 g     O .vq_text_data	00000018 .hidden layer3_prelu
+00009188 g     F .text	000006d4 __kernel_rem_pio2f
+00000278  w    F .text	00000002 NVIC_Handler_015
+00004248 g     F .text	0000002c MDrv_INTC_FIQSetMask
+00000400 g       *ABS*	00000000 _Minimum_Heap_Size
+00007494 g     F .text	00000024 VocTaskReset
+00000278  w    F .text	00000002 BusFault_Handler
+000318da g     O .bss	00000001 __lock___dd_hash_mutex
+0000b37c g     F .text	00000080 __smakebuf_r
+000318db g     O .bss	00000001 __lock___tz_mutex
+00000278  w    F .text	00000002 NVIC_Handler_073
+00042bc8 g     O .vq_bss	00000018 .hidden layer17_relu
+0000adec g     F .text	00000010 strlen
+00009a00 g     F .text	000000a8 rintf
+000027e4 g     F .text	0000002c pxPortInitialiseStack
+00004ad0 g     F .text	0000000c uart_clear_msr
+0000a388 g     F .text	00000010 .hidden __aeabi_cdcmpeq
+0000a2ec g     F .text	0000008a .hidden __gedf2
+0005be6c g     O .vq_text_data	00000040 .hidden prelu1_weights
+0003ae18 g       .dsp_text_data	00000000 __vq_start__
+00031678 g     O .bss	00000004 __malloc_sbrk_start
+000573cc g     O .vq_text_data	00001200 .hidden cnnx2_weights
+00004920 g     F .text	00000024 MHAL_AUD_DMAEnableAEC
+0000997c g     F .text	0000007c floorf
+00000278  w    F .text	00000002 NVIC_Handler_035
+00001c78 g     F .text	00000038 vTaskSetTimeOutState
+00009e18 g     F .text	00000042 .hidden __aeabi_f2d
+00004900 g     F .text	0000000c MHAL_AUD_DMASetModeExt
+00000278  w    F .text	00000002 NVIC_Handler_059
+00002834 g     F .text	00000044 vPortEnterCritical
+0000490c g     F .text	00000014 MHAL_AUD_DMAEnableSigGen
+00043dbc g     F .vq_text_data	00000004 kws_status
+0003ad00 g       .msp	00000000 _end_main_stack
+00031674 g     O .bss	00000004 __malloc_free_list
+00044760 g     O .vq_text_data	00000074 .hidden layer2_cnnx
+0005bcec g     O .vq_text_data	00000060 .hidden prelu11_weights
+00051e44 g     O .vq_text_data	00003f00 .hidden cnnx20_weights
+00000278  w    F .text	00000002 NVIC_Handler_076
+00000278  w    F .text	00000002 NVIC_Handler_062
+00005464 g     F .text	00000002 Mhal_PM_Suspend
+00048394 g     O .vq_text_data	00002d00 .hidden cnnx12_weights
+00009b58 g     F .text	0000027a .hidden __subdf3
+0003ad8c g     F .dsp_text_data	0000008c arm_add_f32
+00000278  w    F .text	00000002 NVIC_Handler_070
+00043d5c g     F .vq_text_data	0000001c .hidden ZFea_creat
+00000278  w    F .text	00000002 NVIC_Handler_129
+00000278  w    F .text	00000002 NVIC_Handler_123
+00000278  w    F .text	00000002 NVIC_Handler_126
+00005074 g     F .text	00000014 MHal_Timer_GetMax
+00001f74 g     F .text	00000018 uxTaskResetEventItemValue
+00000a4c g     F .text	00000072 xQueueCreateMutex
+00000278  w    F .text	00000002 NVIC_Handler_084
+00003bfc g     F .text	00000070 MDrv_AUD_Start
+0000a4f8 g     F .text	00000160 .hidden __addsf3
+0003187c g     O .bss	00000058 _xMbxTaskBuffer
+00044144 g     F .vq_text_data	00000254 .hidden load_model
+00003734 g     F .text	00000078 xSerialPortInitMinimal
+00000278  w    F .text	00000002 NVIC_Handler_002
+00000278  w    F .text	00000002 NVIC_Handler_047
+000585e4 g     O .vq_text_data	00000060 .hidden cnnx4_biases
+0005c2b8 g       .vq_text_data	00000000 __vq_end__
+00000278  w    F .text	00000002 NVIC_Handler_121
+000318dc g     O .bss	00000001 __lock___sfp_recursive_mutex
+0004495c g     O .vq_text_data	00000018 .hidden cnnx0_k_tensor
+00000ba0 g     F .text	000000c0 xQueueGiveFromISR
+0000b56c g     F .text	00000010 _close
+0004678c g     O .vq_text_data	00000060 .hidden cnnx10_biases
+0000b1e4 g     F .text	0000000c __sinit_lock_acquire
+00004b00 g     F .text	00000018 uart_write_byte
+00051e2c g     O .vq_text_data	00000018 .hidden cnnx20_k_tensor
+000079a4 g     F .text	0000003c vApplicationIdleHook
+
+
