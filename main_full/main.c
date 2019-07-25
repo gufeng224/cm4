@@ -61,7 +61,7 @@ int main( void )
   VocTaskStart();
 
 #if !defined(CONFIG_SYS_UART_DISABLE)
-  vUARTCommandConsoleStart(256, ( tskIDLE_PRIORITY + 1 ));
+   vUARTCommandConsoleStart(256, ( tskIDLE_PRIORITY + 1 ));
 #endif
 
   vTaskStartScheduler();

@@ -369,10 +369,11 @@ static void prvVocProcTask(void *pvParameters)
         
        if(bRet)
         {
-         // static char buf[1024];
-         // vTaskGetRunTimeStats(buf);
-         // printf("Run Time Stats:\nTask Name Time Percent\n%s\n", buf);
- 
+       #if 0
+         static char buf[1024];
+         vTaskGetRunTimeStats(buf);
+         printf("Run Time Stats:\nTask Name Time Percent\n%s\n", buf);
+       #endif
           wakeUpNum++;
           printf("wake up num ---%d \n",wakeUpNum);
           VOC_MSG("MApi_VOC_VQPort: VQ process success t = %d\n", xTaskGetTickCount() * portTICK_PERIOD_MS);

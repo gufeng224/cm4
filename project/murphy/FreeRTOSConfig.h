@@ -151,9 +151,9 @@ the comments at the top of main.c for more information. */
 #define configSUPPORT_STATIC_ALLOCATION			1
 
 /* Run time stats gathering definitions. */
-#define configGENERATE_RUN_TIME_STATS	0
+#define configGENERATE_RUN_TIME_STATS	1
 #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()
-#define portGET_RUN_TIME_COUNTER_VALUE()   
+#define portGET_RUN_TIME_COUNTER_VALUE()  xTaskGetTickCount() 
 
 /* This demo makes use of one or more example stats formatting functions.  These
 format the raw data provided by the uxTaskGetSystemState() function in to human
